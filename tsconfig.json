@@ -18,6 +18,9 @@
     "jsx": "react-jsx",
 		"allowImportingTsExtensions": true
   },
-  "include": ["src"],
+  "include": [
+		".eslintrc",
+		"src"
+	],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
