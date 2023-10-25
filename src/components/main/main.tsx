@@ -16,7 +16,8 @@ const fetchPeople = async () => {
 };
 
 fetchPeople();
-export const Main = () => {
+
+function Main() {
   return (
     <>
       <div className="main">
@@ -29,4 +30,6 @@ export const Main = () => {
       </div>
     </>
   );
-};
+}
+
+export default Main;

@@ -1,9 +1,11 @@
 import Search from '../search/search';
 
-export const Header = () => {
+function Header() {
   return (
     <>
       <Search />
     </>
   );
-};
+}
+
+export default Header;
