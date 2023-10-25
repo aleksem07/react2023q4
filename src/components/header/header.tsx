@@ -1,7 +1,9 @@
+import Search from '../search/search';
+
 export const Header = () => {
   return (
     <>
-      <div className="header">Header</div>
+      <Search />
     </>
   );
 };
