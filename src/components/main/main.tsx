@@ -1,4 +1,5 @@
 import { Person } from './main.types';
+import Pagination from '../pagination/pagination';
 import './main.scss';
 
 const url = 'https://swapi.dev/api/people?search=la';
@@ -27,6 +28,8 @@ function Main() {
             <li key={index}>{person.name}</li>
           ))}
         </ul>
+
+        <Pagination />
       </div>
     </>
   );
