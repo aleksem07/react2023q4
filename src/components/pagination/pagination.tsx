@@ -6,15 +6,13 @@ function Pagination() {
           <li className="page-item disabled">
             <span className="page-link">Prev</span>
           </li>
-          <li className="page-item">
+          <li className="page-item active">
             <a className="page-link" href="#">
-              1
+              1<span className="sr-only visually-hidden">(current)</span>
             </a>
           </li>
-          <li className="page-item active">
-            <span className="page-link">
-              2<span className="sr-only visually-hidden">(current)</span>
-            </span>
+          <li className="page-item">
+            <span className="page-link">2</span>
           </li>
           <li className="page-item">
             <a className="page-link" href="#">
