@@ -1,38 +1,45 @@
-import { Person } from './main.types';
-import Pagination from '../pagination/pagination';
+import React from 'react';
 import './main.scss';
+import { Person, MainState } from './main.types';
+import Pagination from '../pagination/pagination';
+import getHeroesAll from '../../services/heroes/heroes';
 
-const url = 'https://swapi.dev/api/people?search=la';
-
-let people: Person[] = [];
-
-const fetchPeople = async () => {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    people = await data.results;
-  } catch (error) {
-    console.error('Error fetching data:', error);
+class Main extends React.Component<Person, MainState> {
+  constructor(props: Person) {
+    super(props);
+    this.state = {
+      people: [],
+    };
   }
-};
 
-fetchPeople();
+  componentDidMount() {
+    this.fetchHeroes();
+  }
 
-function Main() {
-  return (
-    <>
-      <div className="main">
-        <h1 className="h2">main</h1>
-        <ul>
-          {people.map((person, index) => (
-            <li key={index}>{person.name}</li>
-          ))}
-        </ul>
+  async fetchHeroes() {
+    const heroes = await getHeroesAll();
+    if (heroes) {
+      this.setState({ people: heroes });
+    }
+  }
 
-        <Pagination />
-      </div>
-    </>
-  );
+  render() {
+    const { people } = this.state;
+
+    return (
+      <>
+        <div className="main">
+          <h1 className="h2">main</h1>
+          <ul>
+            {people.map((person, index) => (
+              <li key={index}>{person.name}</li>
+            ))}
+          </ul>
+          <Pagination />
+        </div>
+      </>
+    );
+  }
 }
 
 export default Main;

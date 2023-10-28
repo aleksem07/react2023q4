@@ -9,7 +9,7 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "lint": "eslint ./src",
-    "format:fix": "prettier --write **/*.{scss,ts,tsx}",
+    "format:fix": "prettier --write --color **/*.{scss,ts,tsx}",
     "preview": "vite preview",
     "deploy": "npm run build && gh-pages -d dist",
     "prepare": "cd .. && husky install"
