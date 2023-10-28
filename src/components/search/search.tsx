@@ -17,7 +17,7 @@ function Search() {
         onChange={handleSearch}
       />
       <div className="input-group-append">
-        <button className="btn btn-outline-secondary" type="button">
+        <button className="btn btn-outline-dark" type="button">
           Search
         </button>
       </div>

@@ -12,15 +12,17 @@ function Pagination() {
             </a>
           </li>
           <li className="page-item">
-            <span className="page-link">2</span>
+            <a className="page-link text-dark" href="#">
+              2
+            </a>
           </li>
           <li className="page-item">
-            <a className="page-link" href="#">
+            <a className="page-link text-dark" href="#">
               3
             </a>
           </li>
           <li className="page-item">
-            <a className="page-link" href="#">
+            <a className="page-link text-dark" href="#">
               Next
             </a>
           </li>
