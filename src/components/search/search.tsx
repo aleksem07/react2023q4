@@ -1,5 +1,11 @@
+import getHeroesAll from '../../services/heroes/heroes';
+
 const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
   localStorage.setItem('search', e.target.value);
+};
+
+const searchButton = () => {
+  getHeroesAll(getSearchValue);
 };
 
 const getSearchValue: string = localStorage.getItem('search') || '';
@@ -17,7 +23,11 @@ function Search() {
         onChange={handleSearch}
       />
       <div className="input-group-append">
-        <button className="btn btn-outline-dark" type="button">
+        <button
+          className="btn btn-outline-dark"
+          type="button"
+          onClick={searchButton}
+        >
           Search
         </button>
       </div>

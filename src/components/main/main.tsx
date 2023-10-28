@@ -20,7 +20,7 @@ class Main extends React.Component<Person, MainState> {
 
   async fetchHeroes() {
     this.setState({ loading: true });
-    const heroes = await getHeroesAll();
+    const heroes = await getHeroesAll('');
     if (heroes) {
       this.setState({ people: heroes, loading: false });
     }
@@ -39,7 +39,9 @@ class Main extends React.Component<Person, MainState> {
             <>
               <ul>
                 {people.map((person, index) => (
-                  <li key={index}>{person.name}</li>
+                  <li key={index}>
+                    name: {person.name} birth: {person.birth_year}
+                  </li>
                 ))}
               </ul>
               <Pagination />
