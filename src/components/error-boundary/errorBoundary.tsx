@@ -1,13 +1,5 @@
 import React from 'react';
-
-type ErrorBoundaryProps = {
-  children?: React.ReactNode;
-};
-
-type ErrorBoundaryState = {
-  error: Error | null;
-  errorInfo: React.ErrorInfo | null;
-};
+import { ErrorBoundaryProps, ErrorBoundaryState } from './errorBoundary.types';
 
 class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
@@ -15,22 +7,26 @@ class ErrorBoundary extends React.Component<
 > {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { error: null, errorInfo: null };
+    this.state = { hasError: false, error: null, errorInfo: null };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     this.setState({ error, errorInfo });
   }
 
   render() {
-    if (this.state.errorInfo) {
+    if (this.state.hasError) {
       return (
         <div>
-          <h2>Something went wrong.</h2>
+          <h2>Something went wrong... Please reboot the application </h2>
           <details style={{ whiteSpace: 'pre-wrap' }}>
             {this.state.error && this.state.error.toString()}
             <br />
-            {this.state.errorInfo.componentStack}
+            {this.state.errorInfo && this.state.errorInfo.componentStack}
           </details>
         </div>
       );
