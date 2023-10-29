@@ -4,6 +4,7 @@ import { MainProps, MainState } from './main.types';
 import Pagination from '../pagination/pagination';
 import getHeroesAll from '../../services/heroes/heroes';
 import { Loader } from '../loader/loader';
+import HeroItem from '../hero-item/hero-item';
 
 class Main extends React.Component<MainProps, MainState> {
   constructor(props: MainProps) {
@@ -39,17 +40,20 @@ class Main extends React.Component<MainProps, MainState> {
 
     return (
       <>
-        <div className="main p-5">
+        <div className="main p-5 pb-0 container">
           <h1 className="h2 text-center mb-3">Star Wars Heroes</h1>
           {loading ? (
             <Loader />
           ) : (
             <>
-              <ul>
+              <ul className="row flex flex-row flex-wrap mb-3">
                 {people.length > 0 ? (
                   people.map((person, index) => (
-                    <li key={index}>
-                      name: {person.name} birth: {person.birth_year}
+                    <li
+                      key={index}
+                      className="col-4 list-group w-25 align-items-center"
+                    >
+                      <HeroItem person={person} />
                     </li>
                   ))
                 ) : (
