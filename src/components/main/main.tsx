@@ -56,7 +56,7 @@ class Main extends React.Component<MainProps, MainState> {
                   <li className="text-left">Sorry... No results found</li>
                 )}
               </ul>
-              <Pagination />
+              {people.length > 0 ? <Pagination /> : null}
             </>
           )}
         </div>
