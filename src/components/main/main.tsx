@@ -1,5 +1,5 @@
-import React from 'react';
 import './main.scss';
+import React from 'react';
 import { MainProps, MainState } from './main.types';
 import Pagination from '../pagination/pagination';
 import getHeroesAll from '../../services/heroes/heroes';
