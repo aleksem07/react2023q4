@@ -46,11 +46,15 @@ class Main extends React.Component<MainProps, MainState> {
           ) : (
             <>
               <ul>
-                {people.map((person, index) => (
-                  <li key={index}>
-                    name: {person.name} birth: {person.birth_year}
-                  </li>
-                ))}
+                {people.length > 0 ? (
+                  people.map((person, index) => (
+                    <li key={index}>
+                      name: {person.name} birth: {person.birth_year}
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-left">Sorry... No results found</li>
+                )}
               </ul>
               <Pagination />
             </>
