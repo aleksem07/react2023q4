@@ -2,6 +2,8 @@ import React from 'react';
 import Header from './components/header/header';
 import Main from './components/main/main';
 import { MainProps } from './App.types';
+import ErrorBoundary from './components/error-boundary/errorBoundary';
+import ErrorComponent from './components/error-component/errorComponent';
 
 class App extends React.Component {
   constructor(props: MainProps) {
@@ -19,6 +21,9 @@ class App extends React.Component {
       <>
         <Header onSearch={this.handleSearchChange} />
         <Main searchValue={localStorage.getItem('search') || ''} />
+        <ErrorBoundary>
+          <ErrorComponent />
+        </ErrorBoundary>
       </>
     );
   }
