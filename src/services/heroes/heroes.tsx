@@ -5,7 +5,6 @@ async function getHeroesAll(searchValue: string) {
     }`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log('i load');
     return await data.results;
   } catch (error) {
     console.error('Error fetching data:', error);

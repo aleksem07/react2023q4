@@ -6,4 +6,9 @@ export type Person = {
 export type MainState = {
   people: Person[];
   loading: boolean;
+  searchValue: string;
+};
+
+export type MainProps = {
+  searchValue: string;
 };

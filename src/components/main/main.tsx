@@ -1,26 +1,34 @@
 import React from 'react';
 import './main.scss';
-import { Person, MainState } from './main.types';
+import { MainProps, MainState } from './main.types';
 import Pagination from '../pagination/pagination';
 import getHeroesAll from '../../services/heroes/heroes';
 import { Loader } from '../loader/loader';
 
-class Main extends React.Component<Person, MainState> {
-  constructor(props: Person) {
+class Main extends React.Component<MainProps, MainState> {
+  constructor(props: MainProps) {
     super(props);
     this.state = {
       people: [],
       loading: false,
+      searchValue: this.getSearchValue,
     };
   }
+  getSearchValue: string = localStorage.getItem('search') || '';
 
   componentDidMount() {
-    this.fetchHeroes();
+    this.fetchHeroes(this.props.searchValue);
   }
 
-  async fetchHeroes() {
+  componentDidUpdate(prevProps: MainProps) {
+    if (prevProps.searchValue !== this.props.searchValue) {
+      this.fetchHeroes(this.props.searchValue);
+    }
+  }
+
+  async fetchHeroes(searchValue: string) {
     this.setState({ loading: true });
-    const heroes = await getHeroesAll('');
+    const heroes = await getHeroesAll(searchValue);
     if (heroes) {
       this.setState({ people: heroes, loading: false });
     }
