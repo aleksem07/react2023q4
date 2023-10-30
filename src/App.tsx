@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/header/header';
 import Main from './components/main/main';
 import ErrorBoundary from './components/error-boundary/errorBoundary';
 import ErrorComponent from './components/error-component/errorComponent';
 
-class App extends React.Component {
-  handleSearchChange = (searchValue: string) => {
-    this.setState({ searchValue });
+export default function App() {
+  const [searchValue, setSearchValue] = useState(
+    localStorage.getItem('search') || ''
+  );
+  const handleSearchChange = (searchValue: string) => {
+    setSearchValue(searchValue);
   };
 
-  render() {
-    return (
-      <>
-        <Header onSearch={this.handleSearchChange} />
-        <Main searchValue={localStorage.getItem('search') || ''} />
-        <ErrorBoundary>
-          <ErrorComponent />
-        </ErrorBoundary>
-      </>
-    );
-  }
+  return (
+    <>
+      <Header onSearch={handleSearchChange} />
+      <Main value={searchValue} />
+      <ErrorBoundary>
+        <ErrorComponent />
+      </ErrorBoundary>
+    </>
+  );
 }
-
-export default App;
