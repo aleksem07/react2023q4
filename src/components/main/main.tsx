@@ -9,9 +9,7 @@ import { MainProps } from './main.types';
 export default function Main({ value }: MainProps) {
   const [hero, setHero] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchValue, setSearchValue] = useState(
-    localStorage.getItem('search') || ''
-  );
+  const [searchValue, setSearchValue] = useState(value);
 
   useEffect(() => {
     setSearchValue(value || '');
