@@ -1,10 +1,12 @@
 import './main.scss';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from '../pagination/pagination';
 import getHeroesAll from '../../services/heroes/heroes';
 import { Loader } from '../loader/loader';
 import HeroItem from '../hero-item/hero-item';
 import { MainProps } from './main.types';
+import { AppRoute } from '../../const';
 
 export default function Main({ value }: MainProps) {
   const [hero, setHero] = useState([]);
@@ -33,31 +35,31 @@ export default function Main({ value }: MainProps) {
   }, [searchValue]);
 
   return (
-    <>
-      <div className="main p-5 pb-0 container">
-        <h1 className="h2 text-center mb-3">Star Wars Heroes</h1>
-        {loading ? (
-          <Loader />
-        ) : (
-          <>
-            <ul className="row flex flex-row flex-wrap mb-3">
-              {hero.length > 0 ? (
-                hero.map((person, index) => (
-                  <li
-                    key={index}
-                    className="col-4 list-group w-25 align-items-center"
-                  >
+    <div className="main p-5 pb-0 container">
+      <h1 className="h2 text-center mb-3">Star Wars Heroes</h1>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <ul className="row flex flex-row flex-wrap mb-3">
+            {hero.length > 0 ? (
+              hero.map((person, index) => (
+                <li
+                  key={person['name'] + index}
+                  className="col-4 list-group w-25 align-items-center"
+                >
+                  <Link to={`${AppRoute.Hero}/${person['name']}`}>
                     <HeroItem person={person} />
-                  </li>
-                ))
-              ) : (
-                <li className="text-left">Sorry... No results found</li>
-              )}
-            </ul>
-            {hero.length > 0 ? <Pagination /> : null}
-          </>
-        )}
-      </div>
-    </>
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <li className="text-left">Sorry... No results found</li>
+            )}
+          </ul>
+          {hero.length > 0 ? <Pagination /> : null}
+        </>
+      )}
+    </div>
   );
 }
