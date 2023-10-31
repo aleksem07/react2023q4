@@ -5,6 +5,7 @@ import ErrorComponent from './components/error-component/errorComponent';
 import { AppRoute } from './const';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './layout/layout';
+import PageNotFound from './pages/not-found';
 
 export default function App() {
   const [searchValue, setSearchValue] = useState(
@@ -33,7 +34,8 @@ export default function App() {
               </>
             }
           />
-          {/* <Route path={AppRoute.Page404} element={<Page404 />} /> */}
+          <Route path={`${AppRoute.Hero}/:id`} element={''} />
+          <Route path={AppRoute.Page404} element={<PageNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
