@@ -1,7 +1,7 @@
 import { HeroItemProps } from './hero-item.types';
 
 export default function HeroItem({ person }: HeroItemProps) {
-  const { name, birth_year } = person;
+  const { name, height } = person;
 
   return (
     <>
@@ -12,7 +12,7 @@ export default function HeroItem({ person }: HeroItemProps) {
         className="rounded mb-2"
       />
       <h3 className="h5">{name}</h3>
-      <p>birth: {birth_year}</p>
+      <p>height: {height}</p>
     </>
   );
 }

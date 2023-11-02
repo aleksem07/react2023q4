@@ -6,6 +6,7 @@ import { AppRoute } from './const';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './layout/layout';
 import PageNotFound from './pages/not-found';
+import HeroCard from './components/hero-card/hero-card';
 
 export default function App() {
   const [searchValue, setSearchValue] = useState(
@@ -31,9 +32,8 @@ export default function App() {
               </>
             }
           >
-            <Route path="hero/:id" element={<PageNotFound />} />
+            <Route path={`${AppRoute.Hero}/:id`} element={<HeroCard />} />
           </Route>
-          {/* <Route path={`${AppRoute.Hero}/:id`} element={'page hero'} /> */}
           <Route path={AppRoute.Page404} element={<PageNotFound />} />
         </Route>
       </Routes>

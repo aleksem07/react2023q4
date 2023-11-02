@@ -9,7 +9,7 @@ import { MainProps } from './main.types';
 import { AppRoute } from '../../const';
 
 export default function Main({ search }: MainProps) {
-  const PAGE_DEFAULT = 9;
+  const PAGE_DEFAULT = 1;
   localStorage.setItem('page', PAGE_DEFAULT.toString());
   const getCurrent = () => {
     return Number(localStorage.getItem('page'));
@@ -85,7 +85,7 @@ export default function Main({ search }: MainProps) {
           </>
         )}
       </div>
-      <Outlet context={hero} />
+      <Outlet context={{ hero }} />
     </div>
   );
 }
