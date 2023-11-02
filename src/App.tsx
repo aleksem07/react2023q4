@@ -19,12 +19,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path={AppRoute.Root}
-          element={<Layout onSearch={handleSearchChange} />}
-        >
+        <Route element={<Layout onSearch={handleSearchChange} />}>
           <Route
-            index
+            path={AppRoute.Root}
             element={
               <>
                 <Main value={searchValue} />
@@ -33,8 +30,10 @@ export default function App() {
                 </ErrorBoundary>
               </>
             }
-          />
-          <Route path={`${AppRoute.Hero}/:id`} element={'page hero'} />
+          >
+            <Route path="hero/:id" element={<PageNotFound />} />
+          </Route>
+          {/* <Route path={`${AppRoute.Hero}/:id`} element={'page hero'} /> */}
           <Route path={AppRoute.Page404} element={<PageNotFound />} />
         </Route>
       </Routes>
