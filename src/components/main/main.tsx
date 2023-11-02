@@ -47,6 +47,7 @@ export default function Main({ search }: MainProps) {
     };
 
     fetchHeroes(currentPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
   const handlePageChange = async (newPage: number) => {
