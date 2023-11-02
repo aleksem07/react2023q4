@@ -82,7 +82,10 @@ export default function Main({ search }: MainProps) {
                     key={person['name'] + index}
                     className="list-group col-3 w-25"
                   >
-                    <Link to={`${AppRoute.Hero}/${person['name']}`}>
+                    <Link
+                      className="card-link"
+                      to={`${AppRoute.Hero}/${person['name']}`}
+                    >
                       <HeroItem person={person} />
                     </Link>
                   </li>

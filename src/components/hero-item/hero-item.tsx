@@ -4,7 +4,7 @@ export default function HeroItem({ person }: HeroItemProps) {
   const { name } = person;
 
   return (
-    <div>
+    <>
       <img
         src="placeholder.webp"
         alt="placeholder"
@@ -16,6 +16,6 @@ export default function HeroItem({ person }: HeroItemProps) {
           {name}
         </h3>
       </div>
-    </div>
+    </>
   );
 }
