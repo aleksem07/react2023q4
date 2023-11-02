@@ -68,7 +68,7 @@ export default function Main({ search }: MainProps) {
                 hero.map((person, index) => (
                   <li
                     key={person['name'] + index}
-                    className="col-4 list-group w-25 align-items-center"
+                    className="list-group col-3 w-25"
                   >
                     <Link to={`${AppRoute.Hero}/${person['name']}`}>
                       <HeroItem person={person} />

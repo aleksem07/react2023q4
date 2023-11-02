@@ -4,7 +4,7 @@ export default function HeroItem({ person }: HeroItemProps) {
   const { name, height } = person;
 
   return (
-    <>
+    <div className="align-items-center">
       <img
         src="placeholder.webp"
         alt="placeholder"
@@ -13,6 +13,6 @@ export default function HeroItem({ person }: HeroItemProps) {
       />
       <h3 className="h5">{name}</h3>
       <p>height: {height}</p>
-    </>
+    </div>
   );
 }
