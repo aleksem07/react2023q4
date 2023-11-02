@@ -8,7 +8,7 @@ function Pagination({ fetchData, page, onPageChange }: PaginationProps) {
   return (
     <>
       <nav aria-label="...">
-        <ul className="pagination justify-content-center">
+        <ul className="pagination justify-content-center gap-2">
           {fetchData.previous !== null && page > 1 ? (
             <>
               <li className="page-item bg-light">
