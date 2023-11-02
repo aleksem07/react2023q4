@@ -1,6 +1,6 @@
 import './main.scss';
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, Outlet } from 'react-router-dom';
 import Pagination from '../pagination/pagination';
 import getHeroesAll from '../../services/heroes/heroes';
 import { Loader } from '../loader/loader';
@@ -9,12 +9,12 @@ import { MainProps } from './main.types';
 import { AppRoute } from '../../const';
 
 export default function Main({ search }: MainProps) {
-  const PAGE_DEFAULT = 1;
+  const PAGE_DEFAULT = 9;
   localStorage.setItem('page', PAGE_DEFAULT.toString());
   const getCurrent = () => {
     return Number(localStorage.getItem('page'));
   };
-  const location = useLocation();
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
     next: null,
@@ -36,18 +36,12 @@ export default function Main({ search }: MainProps) {
     const fetchHeroes = async (page: number) => {
       setLoading(true);
       try {
-        const heroes = await getHeroesAll(searchValue, 2);
+        const heroes = await getHeroesAll(searchValue, PAGE_DEFAULT);
         setData(heroes);
 
         if (heroes) {
           setHero(heroes.results);
-          const params = new URLSearchParams(location.search);
-          params.set('page', (2).toString());
-          window.history.replaceState(
-            {},
-            '',
-            `${location.pathname}?${params.toString()}`
-          );
+          navigate(`/?page=${PAGE_DEFAULT}`);
           setCurrentPage(page);
           localStorage.setItem('page', page.toString());
         }
@@ -59,34 +53,39 @@ export default function Main({ search }: MainProps) {
     };
 
     fetchHeroes(getCurrent());
-  }, [searchValue, location, currentPage]);
+  }, [searchValue, currentPage]);
 
   return (
     <div className="main p-5 pb-0 container">
-      <h1 className="h2 text-center mb-3">Star Wars Heroes</h1>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <ul className="row flex flex-row flex-wrap mb-3">
+      <div className="main__container">
+        <h1 className="h2 text-center mb-3">Star Wars Heroes</h1>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <ul className="row flex flex-row flex-wrap mb-3">
+              {hero.length > 0 ? (
+                hero.map((person, index) => (
+                  <li
+                    key={person['name'] + index}
+                    className="col-4 list-group w-25 align-items-center"
+                  >
+                    <Link to={`${AppRoute.Hero}/${person['name']}`}>
+                      <HeroItem person={person} />
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li className="text-left">Sorry... No results found</li>
+              )}
+            </ul>
             {hero.length > 0 ? (
-              hero.map((person, index) => (
-                <li
-                  key={person['name'] + index}
-                  className="col-4 list-group w-25 align-items-center"
-                >
-                  <Link to={`${AppRoute.Hero}/${person['name']}`}>
-                    <HeroItem person={person} />
-                  </Link>
-                </li>
-              ))
-            ) : (
-              <li className="text-left">Sorry... No results found</li>
-            )}
-          </ul>
-          {hero.length > 0 ? <Pagination fetchData={data} page={2} /> : null}
-        </>
-      )}
+              <Pagination fetchData={data} page={PAGE_DEFAULT} />
+            ) : null}
+          </>
+        )}
+      </div>
+      <Outlet context={hero} />
     </div>
   );
 }
