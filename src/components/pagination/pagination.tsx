@@ -1,31 +1,84 @@
-function Pagination() {
+type PaginationProps = {
+  fetchData: FetchData;
+  page: number;
+};
+
+type FetchData = {
+  next: string | null;
+  previous: string | null;
+};
+
+function Pagination({ fetchData, page }: PaginationProps) {
+  const handleClickNextButton = () => {
+    const current = localStorage.getItem('page');
+    if (current) {
+      localStorage.setItem('page', String(Number(current) + 1));
+    }
+  };
+  const handleClickPrevButton = () => {
+    const current = localStorage.getItem('page');
+    if (current) {
+      localStorage.setItem('page', String(Number(current) - 1));
+    }
+  };
+
   return (
     <>
       <nav aria-label="...">
         <ul className="pagination justify-content-center">
-          <li className="page-item disabled">
-            <span className="page-link">Prev</span>
-          </li>
+          {fetchData.previous !== null && page > 1 ? (
+            <>
+              <li className="page-item bg-light">
+                <button
+                  onClick={handleClickPrevButton}
+                  className="page-link text-dark"
+                >
+                  Prev
+                </button>
+              </li>
+              <li className="page-item ">
+                <button className="page-link text-dark">{page - 1}</button>
+              </li>
+            </>
+          ) : (
+            <li className="page-item disabled">
+              <button
+                onClick={handleClickPrevButton}
+                className="page-link text-dark"
+              >
+                Prev
+              </button>
+            </li>
+          )}
+
           <li className="page-item active">
-            <a className="page-link" href="#">
-              1<span className="sr-only visually-hidden">(current)</span>
-            </a>
+            <button className="page-link text-dark">{page}</button>
           </li>
-          <li className="page-item">
-            <a className="page-link text-dark" href="#">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link text-dark" href="#">
-              3
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link text-dark" href="#">
-              Next
-            </a>
-          </li>
+
+          {fetchData.next !== null ? (
+            <>
+              <li className="page-item">
+                <button className="page-link text-dark">{page + 1}</button>
+              </li>
+              <li className="page-item">
+                <button
+                  onClick={handleClickNextButton}
+                  className="page-link text-dark"
+                >
+                  Next
+                </button>
+              </li>
+            </>
+          ) : (
+            <li className="page-item disabled">
+              <button
+                onClick={handleClickNextButton}
+                className="page-link text-dark"
+              >
+                Next
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
     </>

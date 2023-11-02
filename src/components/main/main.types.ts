@@ -4,5 +4,5 @@ export type Person = {
 };
 
 export type MainProps = {
-  value: string;
+  search: string;
 };

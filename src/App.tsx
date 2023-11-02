@@ -27,7 +27,7 @@ export default function App() {
             index
             element={
               <>
-                <Main value={searchValue} />
+                <Main search={searchValue} />
                 <ErrorBoundary>
                   <ErrorComponent />
                 </ErrorBoundary>

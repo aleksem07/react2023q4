@@ -1,6 +1,6 @@
 import './main.scss';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Pagination from '../pagination/pagination';
 import getHeroesAll from '../../services/heroes/heroes';
 import { Loader } from '../loader/loader';
@@ -8,22 +8,48 @@ import HeroItem from '../hero-item/hero-item';
 import { MainProps } from './main.types';
 import { AppRoute } from '../../const';
 
-export default function Main({ value }: MainProps) {
+export default function Main({ search }: MainProps) {
+  const PAGE_DEFAULT = 1;
+  localStorage.setItem('page', PAGE_DEFAULT.toString());
+  const getCurrent = () => {
+    return Number(localStorage.getItem('page'));
+  };
+  const location = useLocation();
+
+  const [data, setData] = useState({
+    next: null,
+    previous: null,
+    results: [],
+  });
   const [hero, setHero] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchValue, setSearchValue] = useState(value);
+  const [searchValue, setSearchValue] = useState(search);
+  const [currentPage, setCurrentPage] = useState(
+    Number(localStorage.getItem('page'))
+  );
 
   useEffect(() => {
-    setSearchValue(value || '');
-  }, [value]);
+    setSearchValue(search || '');
+  }, [search]);
 
   useEffect(() => {
-    const fetchHeroes = async () => {
+    const fetchHeroes = async (page: number) => {
       setLoading(true);
       try {
-        const heroes = await getHeroesAll(searchValue);
+        const heroes = await getHeroesAll(searchValue, 2);
+        setData(heroes);
+
         if (heroes) {
-          setHero(heroes);
+          setHero(heroes.results);
+          const params = new URLSearchParams(location.search);
+          params.set('page', (2).toString());
+          window.history.replaceState(
+            {},
+            '',
+            `${location.pathname}?${params.toString()}`
+          );
+          setCurrentPage(page);
+          localStorage.setItem('page', page.toString());
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -31,8 +57,9 @@ export default function Main({ value }: MainProps) {
         setLoading(false);
       }
     };
-    fetchHeroes();
-  }, [searchValue]);
+
+    fetchHeroes(getCurrent());
+  }, [searchValue, location, currentPage]);
 
   return (
     <div className="main p-5 pb-0 container">
@@ -57,7 +84,7 @@ export default function Main({ value }: MainProps) {
               <li className="text-left">Sorry... No results found</li>
             )}
           </ul>
-          {hero.length > 0 ? <Pagination /> : null}
+          {hero.length > 0 ? <Pagination fetchData={data} page={2} /> : null}
         </>
       )}
     </div>

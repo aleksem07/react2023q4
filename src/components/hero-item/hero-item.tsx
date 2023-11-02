@@ -2,6 +2,7 @@ import { HeroItemProps } from './hero-item.types';
 
 export default function HeroItem({ person }: HeroItemProps) {
   const { name, birth_year } = person;
+
   return (
     <>
       <img
