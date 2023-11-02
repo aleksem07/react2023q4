@@ -34,7 +34,7 @@ export default function App() {
               </>
             }
           />
-          <Route path={`${AppRoute.Hero}/:id`} element={''} />
+          <Route path={`${AppRoute.Hero}/:id`} element={'page hero'} />
           <Route path={AppRoute.Page404} element={<PageNotFound />} />
         </Route>
       </Routes>

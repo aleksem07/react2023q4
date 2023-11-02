@@ -1,6 +1,6 @@
 import './main.scss';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Pagination from '../pagination/pagination';
 import getHeroesAll from '../../services/heroes/heroes';
 import { Loader } from '../loader/loader';
@@ -9,6 +9,7 @@ import { MainProps } from './main.types';
 import { AppRoute } from '../../const';
 
 export default function Main({ value }: MainProps) {
+  const navigate = useNavigate();
   const [hero, setHero] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState(value);
@@ -24,6 +25,7 @@ export default function Main({ value }: MainProps) {
         const heroes = await getHeroesAll(searchValue);
         if (heroes) {
           setHero(heroes);
+          navigate('/?page=1');
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -32,7 +34,7 @@ export default function Main({ value }: MainProps) {
       }
     };
     fetchHeroes();
-  }, [searchValue]);
+  }, [navigate, searchValue]);
 
   return (
     <div className="main p-5 pb-0 container">
