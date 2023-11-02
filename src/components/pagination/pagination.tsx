@@ -1,25 +1,8 @@
-type PaginationProps = {
-  fetchData: FetchData;
-  page: number;
-};
+import { PaginationProps } from './pagination.types';
 
-type FetchData = {
-  next: string | null;
-  previous: string | null;
-};
-
-function Pagination({ fetchData, page }: PaginationProps) {
-  const handleClickNextButton = () => {
-    const current = localStorage.getItem('page');
-    if (current) {
-      localStorage.setItem('page', String(Number(current) + 1));
-    }
-  };
-  const handleClickPrevButton = () => {
-    const current = localStorage.getItem('page');
-    if (current) {
-      localStorage.setItem('page', String(Number(current) - 1));
-    }
+function Pagination({ fetchData, page, onPageChange }: PaginationProps) {
+  const handlePageChange = (newPage: number) => {
+    onPageChange(newPage);
   };
 
   return (
@@ -30,7 +13,7 @@ function Pagination({ fetchData, page }: PaginationProps) {
             <>
               <li className="page-item bg-light">
                 <button
-                  onClick={handleClickPrevButton}
+                  onClick={() => handlePageChange(page - 1)}
                   className="page-link text-dark"
                 >
                   Prev
@@ -42,12 +25,7 @@ function Pagination({ fetchData, page }: PaginationProps) {
             </>
           ) : (
             <li className="page-item disabled">
-              <button
-                onClick={handleClickPrevButton}
-                className="page-link text-dark"
-              >
-                Prev
-              </button>
+              <button className="page-link text-dark">Prev</button>
             </li>
           )}
 
@@ -62,7 +40,7 @@ function Pagination({ fetchData, page }: PaginationProps) {
               </li>
               <li className="page-item">
                 <button
-                  onClick={handleClickNextButton}
+                  onClick={() => handlePageChange(page + 1)}
                   className="page-link text-dark"
                 >
                   Next
@@ -71,12 +49,7 @@ function Pagination({ fetchData, page }: PaginationProps) {
             </>
           ) : (
             <li className="page-item disabled">
-              <button
-                onClick={handleClickNextButton}
-                className="page-link text-dark"
-              >
-                Next
-              </button>
+              <button className="page-link text-dark">Next</button>
             </li>
           )}
         </ul>
