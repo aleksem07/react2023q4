@@ -2,6 +2,8 @@ import './pagination.scss';
 import { PaginationProps } from './pagination.types';
 
 function Pagination({ fetchData, page, onPageChange }: PaginationProps) {
+  const maxPages = fetchData.count ? Math.ceil(fetchData.count / 10) : 1;
+
   const handlePageChange = (newPage: number) => {
     onPageChange(newPage);
   };
@@ -20,7 +22,7 @@ function Pagination({ fetchData, page, onPageChange }: PaginationProps) {
                   Prev
                 </button>
               </li>
-              <li className="page-item ">
+              <li className="page-item disabled">
                 <button className="page-link text-dark">{page - 1}</button>
               </li>
             </>
@@ -30,13 +32,13 @@ function Pagination({ fetchData, page, onPageChange }: PaginationProps) {
             </li>
           )}
 
-          <li className="page-item active-link">
-            <button className="page-link text-dark">{page}</button>
+          <li className="page-item active-link ">
+            <button className="page-link current">{page}</button>
           </li>
 
-          {fetchData.next !== null ? (
+          {fetchData.next !== null && page < maxPages ? (
             <>
-              <li className="page-item">
+              <li className="page-item disabled">
                 <button className="page-link text-dark">{page + 1}</button>
               </li>
               <li className="page-item">

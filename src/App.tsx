@@ -25,8 +25,8 @@ export default function App() {
             path={AppRoute.Root}
             element={
               <>
-                <Main search={searchValue} />
                 <ErrorBoundary>
+                  <Main search={searchValue} />
                   <ErrorComponent />
                 </ErrorBoundary>
               </>

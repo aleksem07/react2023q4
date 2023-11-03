@@ -52,6 +52,7 @@ export default function Main({ search }: MainProps) {
   }, [searchValue]);
 
   const handlePageChange = async (newPage: number) => {
+    setLoading(true);
     setCurrentPage(newPage);
 
     try {
@@ -96,18 +97,18 @@ export default function Main({ search }: MainProps) {
                 <li className="text-left">Sorry... No results found</li>
               )}
             </ul>
-            <div className="pagination d-flex justify-content-center gap-3">
-              {hero.length > 0 ? (
-                <Pagination
-                  fetchData={data}
-                  page={currentPage}
-                  onPageChange={handlePageChange}
-                />
-              ) : null}
-              <InputLimit />
-            </div>
           </>
         )}
+        <div className="pagination d-flex justify-content-center gap-3">
+          {hero.length > 0 ? (
+            <Pagination
+              fetchData={data}
+              page={currentPage}
+              onPageChange={handlePageChange}
+            />
+          ) : null}
+          <InputLimit />
+        </div>
       </div>
       <Outlet context={{ hero }} />
     </div>
