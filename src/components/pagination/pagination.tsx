@@ -1,3 +1,4 @@
+import './pagination.scss';
 import { PaginationProps } from './pagination.types';
 
 function Pagination({ fetchData, page, onPageChange }: PaginationProps) {
@@ -29,7 +30,7 @@ function Pagination({ fetchData, page, onPageChange }: PaginationProps) {
             </li>
           )}
 
-          <li className="page-item active">
+          <li className="page-item active-link">
             <button className="page-link text-dark">{page}</button>
           </li>
 

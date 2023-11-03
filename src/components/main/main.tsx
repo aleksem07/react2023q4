@@ -7,6 +7,7 @@ import { Loader } from '../loader/loader';
 import HeroItem from '../hero-item/hero-item';
 import { MainProps } from './main.types';
 import { AppRoute } from '../../const';
+import InputLimit from '../input-limit/input-limit';
 
 const PAGE_DEFAULT = 1;
 
@@ -95,13 +96,16 @@ export default function Main({ search }: MainProps) {
                 <li className="text-left">Sorry... No results found</li>
               )}
             </ul>
-            {hero.length > 0 ? (
-              <Pagination
-                fetchData={data}
-                page={currentPage}
-                onPageChange={handlePageChange}
-              />
-            ) : null}
+            <div className="pagination d-flex justify-content-center gap-3">
+              {hero.length > 0 ? (
+                <Pagination
+                  fetchData={data}
+                  page={currentPage}
+                  onPageChange={handlePageChange}
+                />
+              ) : null}
+              <InputLimit />
+            </div>
           </>
         )}
       </div>
