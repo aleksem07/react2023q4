@@ -29,11 +29,13 @@ a:hover {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: #ffffff;
 }
 
 html,
 body {
   height: 100%;
+  background: url("background-pattern.jpeg");
 }
 
 body {
