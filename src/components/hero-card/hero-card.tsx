@@ -1,19 +1,8 @@
 import './hero-card.scss';
+import { Hero } from './hero-card.types';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import getHeroesAll from '../../services/heroes/heroes';
-
-type Hero = {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-  homeworld: string;
-};
 
 function HeroCard() {
   const { id } = useParams();
@@ -25,9 +14,7 @@ function HeroCard() {
       try {
         const heroes = await getHeroesAll(`${id}`);
 
-        // if (heroes.results && heroes.results.length > 0) {
         setHero(heroes.results[0] as Hero);
-        // }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
