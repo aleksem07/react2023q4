@@ -10,6 +10,7 @@ import { AppRoute } from '../../const';
 import InputLimit from '../input-limit/input-limit';
 
 const PAGE_DEFAULT = 1;
+const HERO_LIMIT = 2;
 
 export default function Main({ search }: MainProps) {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export default function Main({ search }: MainProps) {
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState(search);
   const [currentPage, setCurrentPage] = useState(PAGE_DEFAULT);
+  const [limit, setLimit] = useState(HERO_LIMIT);
 
   useEffect(() => {
     setSearchValue(search || '');
@@ -36,7 +38,7 @@ export default function Main({ search }: MainProps) {
         setData(heroes);
 
         if (heroes) {
-          setHero(heroes.results);
+          setHero(heroes.results.slice(0, limit));
           navigate(`/?page=${PAGE_DEFAULT}`);
           setCurrentPage(page);
         }
@@ -49,7 +51,7 @@ export default function Main({ search }: MainProps) {
 
     fetchHeroes(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue]);
+  }, [searchValue, limit]);
 
   const handlePageChange = async (newPage: number) => {
     setLoading(true);
@@ -61,7 +63,7 @@ export default function Main({ search }: MainProps) {
       setData(heroes);
 
       if (heroes) {
-        setHero(heroes.results);
+        setHero(heroes.results.slice(0, limit));
         navigate(`/?page=${newPage}`);
       }
     } catch (error) {
@@ -69,6 +71,10 @@ export default function Main({ search }: MainProps) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleLimitChange = (newLimit: number) => {
+    setLimit(newLimit);
   };
 
   return (
@@ -83,7 +89,7 @@ export default function Main({ search }: MainProps) {
               onPageChange={handlePageChange}
             />
           ) : null}
-          <InputLimit />
+          <InputLimit onLimitChange={handleLimitChange} />
         </div>
         {loading ? (
           <Loader />
