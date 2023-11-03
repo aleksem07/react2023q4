@@ -1,3 +1,4 @@
+import './hero-card.scss';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import getHeroesAll from '../../services/heroes/heroes';
@@ -36,14 +37,14 @@ function HeroCard() {
   }, [id]);
 
   return hero === null ? (
-    <div className="container m-5 text-left">
-      <p>{id} data is loading...</p>
+    <div className="container hero-card mx-5 text-left p-2">
+      <p>{id} is loading...</p>
       <p>Please, wait... </p>
     </div>
   ) : (
     <>
-      <div className="container m-5 text-left">
-        <h2 className="h2 p-2 border-bottom bg-dark-subtle">Info</h2>
+      <div className="container hero-card mx-5 text-left">
+        <h2 className="h2 mt-3 p-2 border-bottom bg-dark rounded">Info</h2>
         <p>name: {hero['name']}</p>
         <p>height: {hero['height']}</p>
         <p>mass: {hero['mass']}</p>

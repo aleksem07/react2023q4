@@ -54,6 +54,7 @@ export default function Main({ search }: MainProps) {
   const handlePageChange = async (newPage: number) => {
     setLoading(true);
     setCurrentPage(newPage);
+    navigate(`/?page=${PAGE_DEFAULT}`);
 
     try {
       const heroes = await getHeroesAll(searchValue, newPage);
@@ -73,7 +74,17 @@ export default function Main({ search }: MainProps) {
   return (
     <div className="main p-5 pb-0 container">
       <div className="main__container">
-        <h1 className="h2 text-center mb-3">Star Wars Heroes</h1>
+        <h1 className="h1 text-center mb-3">Star Wars Heroes</h1>
+        <div className="pagination d-flex justify-content-center gap-3">
+          {hero.length > 0 ? (
+            <Pagination
+              fetchData={data}
+              page={currentPage}
+              onPageChange={handlePageChange}
+            />
+          ) : null}
+          <InputLimit />
+        </div>
         {loading ? (
           <Loader />
         ) : (
@@ -99,16 +110,6 @@ export default function Main({ search }: MainProps) {
             </ul>
           </>
         )}
-        <div className="pagination d-flex justify-content-center gap-3">
-          {hero.length > 0 ? (
-            <Pagination
-              fetchData={data}
-              page={currentPage}
-              onPageChange={handlePageChange}
-            />
-          ) : null}
-          <InputLimit />
-        </div>
       </div>
       <Outlet context={{ hero }} />
     </div>
