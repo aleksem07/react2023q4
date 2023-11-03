@@ -10,7 +10,7 @@ import { AppRoute } from '../../const';
 import InputLimit from '../input-limit/input-limit';
 
 const PAGE_DEFAULT = 1;
-const HERO_LIMIT = 2;
+const HERO_LIMIT = 10;
 
 export default function Main({ search }: MainProps) {
   const navigate = useNavigate();
@@ -78,9 +78,9 @@ export default function Main({ search }: MainProps) {
   };
 
   return (
-    <div className="main p-5 pb-0 container">
+    <div className="main p-0 pb-0 container">
       <div className="main__container">
-        <h1 className="h1 text-center mb-3">Star Wars Heroes</h1>
+        <h1 className="h1 text-center my-3">Star Wars Heroes</h1>
         <div className="pagination d-flex justify-content-center gap-3">
           {hero.length > 0 ? (
             <Pagination
@@ -95,13 +95,10 @@ export default function Main({ search }: MainProps) {
           <Loader />
         ) : (
           <>
-            <ul className="row flex flex-row flex-wrap mb-3">
+            <ul className="container d-flex justify-content-center flex-wrap mb-3 gap-3">
               {hero.length > 0 ? (
                 hero.map((person, index) => (
-                  <li
-                    key={person['name'] + index}
-                    className="list-group col-3 w-25"
-                  >
+                  <li key={person['name'] + index} className="list-group w-25">
                     <Link
                       className="card-link"
                       to={`${AppRoute.Hero}/${person['name']}`}

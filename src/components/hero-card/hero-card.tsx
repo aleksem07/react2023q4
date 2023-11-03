@@ -57,7 +57,7 @@ function HeroCard() {
         </p>
         <p>gender: {hero['gender']}</p>
 
-        <Link className="btn btn-secondary mt-5" to="/">
+        <Link className="btn btn-secondary bg-dark mt-5" to="/">
           close
         </Link>
       </div>
