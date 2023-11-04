@@ -1,5 +1,5 @@
 import './main.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import Pagination from '../pagination/pagination';
 import getHeroesAll from '../../services/heroes/heroes';
@@ -14,6 +14,7 @@ const HERO_LIMIT = 10;
 
 export default function Main({ search }: MainProps) {
   const navigate = useNavigate();
+  const listItemsRef = useRef<HTMLUListElement>(null);
 
   const [data, setData] = useState({
     next: null,
@@ -39,7 +40,7 @@ export default function Main({ search }: MainProps) {
 
         if (heroes) {
           setHero(heroes.results.slice(0, limit));
-          navigate(`/?page=${PAGE_DEFAULT}`);
+          navigate(`/?page=${currentPage}`);
           setCurrentPage(page);
         }
       } catch (error) {
@@ -56,7 +57,7 @@ export default function Main({ search }: MainProps) {
   const handlePageChange = async (newPage: number) => {
     setLoading(true);
     setCurrentPage(newPage);
-    navigate(`/?page=${PAGE_DEFAULT}`);
+    navigate(`/?page=${currentPage}`);
 
     try {
       const heroes = await getHeroesAll(searchValue, newPage);
@@ -77,6 +78,26 @@ export default function Main({ search }: MainProps) {
     setLimit(newLimit);
   };
 
+  useEffect(() => {
+    const handleClickCloseModal = (event: MouseEvent) => {
+      const target = event.target as HTMLElement as HTMLElement;
+
+      if (
+        listItemsRef.current &&
+        !listItemsRef.current.contains(target.parentNode as Node)
+      ) {
+        navigate('/');
+      }
+    };
+
+    document.addEventListener('click', handleClickCloseModal);
+
+    return () => {
+      document.removeEventListener('click', handleClickCloseModal);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="main p-0 pb-0 container">
       <div className="main__container">
@@ -95,7 +116,10 @@ export default function Main({ search }: MainProps) {
           <Loader />
         ) : (
           <>
-            <ul className="container d-flex justify-content-center flex-wrap mb-3 gap-3">
+            <ul
+              ref={listItemsRef}
+              className="container d-flex justify-content-center flex-wrap mb-3 gap-3"
+            >
               {hero.length > 0 ? (
                 hero.map((person, index) => (
                   <li key={person['name'] + index} className="list-group w-25">
