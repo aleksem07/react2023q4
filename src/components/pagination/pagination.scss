@@ -1,0 +1,19 @@
+.active-link button {
+  background-color: #212529;
+  color: #ced4da !important;
+  transition: all 0.3s ease-in;
+  cursor: default !important;
+}
+
+.page-item button {
+  transition: all 0.3s ease-in;
+}
+
+.page-item button:hover:not(.active-link button) {
+  background-color: #ffbf00;
+  color: #212529 !important;
+}
+
+nav > ul.pagination {
+  pading-bottom: 25px;
+}
