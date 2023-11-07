@@ -6,35 +6,36 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './layout/layout';
 import PageNotFound from './pages/not-found';
 import HeroCard from './components/hero-card/hero-card';
+import { HeaderSearchContext } from './util/contextAPI/header-search-value';
 
 export default function App() {
-  const [searchValue, setSearchValue] = useState(
+  const [headerSearchValue, setHeaderSearchValue] = useState(
     localStorage.getItem('search') || ''
   );
 
-  const handleSearchChange = (searchValue: string) => {
-    setSearchValue(searchValue);
-  };
-
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Layout onSearch={handleSearchChange} />}>
-          <Route
-            path={AppRoute.Root}
-            element={
-              <>
-                <ErrorBoundary>
-                  <Main search={searchValue} />
-                </ErrorBoundary>
-              </>
-            }
-          >
-            <Route path={`${AppRoute.Hero}/:id`} element={<HeroCard />} />
+      <HeaderSearchContext.Provider
+        value={{ headerSearchValue, setHeaderSearchValue }}
+      >
+        <Routes>
+          <Route element={<Layout />}>
+            <Route
+              path={AppRoute.Root}
+              element={
+                <>
+                  <ErrorBoundary>
+                    <Main />
+                  </ErrorBoundary>
+                </>
+              }
+            >
+              <Route path={`${AppRoute.Hero}/:id`} element={<HeroCard />} />
+            </Route>
+            <Route path={AppRoute.Page404} element={<PageNotFound />} />
           </Route>
-          <Route path={AppRoute.Page404} element={<PageNotFound />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </HeaderSearchContext.Provider>
     </BrowserRouter>
   );
 }

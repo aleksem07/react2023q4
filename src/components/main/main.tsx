@@ -5,37 +5,33 @@ import Pagination from '../pagination/pagination';
 import getHeroesAll from '../../services/heroes/heroes';
 import { Loader } from '../loader/loader';
 import HeroItem from '../hero-item/hero-item';
-import { MainProps } from './main.types';
 import { AppRoute } from '../../const';
 import InputLimit from '../input-limit/input-limit';
+import { useContext } from 'react';
+import { HeaderSearchContext } from '../../util/contextAPI/header-search-value';
 
 const PAGE_DEFAULT = 1;
 const HERO_LIMIT = 10;
 
-export default function Main({ search }: MainProps) {
+export default function Main() {
   const navigate = useNavigate();
   const listItemsRef = useRef<HTMLUListElement>(null);
-
+  const { headerSearchValue } = useContext(HeaderSearchContext);
+  const [hero, setHero] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(PAGE_DEFAULT);
+  const [limit, setLimit] = useState(HERO_LIMIT);
   const [data, setData] = useState({
     next: null,
     previous: null,
     results: [],
   });
-  const [hero, setHero] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [searchValue, setSearchValue] = useState(search);
-  const [currentPage, setCurrentPage] = useState(PAGE_DEFAULT);
-  const [limit, setLimit] = useState(HERO_LIMIT);
-
-  useEffect(() => {
-    setSearchValue(search || '');
-  }, [search]);
 
   useEffect(() => {
     const fetchHeroes = async (page: number) => {
       setLoading(true);
       try {
-        const heroes = await getHeroesAll(searchValue, page);
+        const heroes = await getHeroesAll(headerSearchValue, page);
         setData(heroes);
 
         if (heroes) {
@@ -52,7 +48,7 @@ export default function Main({ search }: MainProps) {
 
     fetchHeroes(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue, limit]);
+  }, [headerSearchValue, limit]);
 
   const handlePageChange = async (newPage: number) => {
     setLoading(true);
@@ -60,7 +56,7 @@ export default function Main({ search }: MainProps) {
     navigate(`/?page=${currentPage}`);
 
     try {
-      const heroes = await getHeroesAll(searchValue, newPage);
+      const heroes = await getHeroesAll(headerSearchValue, newPage);
       setData(heroes);
 
       if (heroes) {

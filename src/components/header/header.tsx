@@ -1,14 +1,9 @@
 import Search from '../search/search';
-import { HeaderProps } from './header.types';
 
-export default function Header({ onSearch }: HeaderProps) {
-  const handleSearchChange = (value: string) => {
-    onSearch(value);
-  };
-
+export default function Header() {
   return (
     <div className="bg-secondary bg-gradient">
-      <Search onSearchChange={handleSearchChange} />
+      <Search />
     </div>
   );
 }

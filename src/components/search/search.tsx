@@ -1,9 +1,9 @@
-function Search({
-  onSearchChange,
-}: {
-  onSearchChange: (searchValue: string) => void;
-}) {
-  const getSearchValue: string = localStorage.getItem('search') || '';
+import { useContext } from 'react';
+import { HeaderSearchContext } from '../../util/contextAPI/header-search-value';
+
+function Search() {
+  const { headerSearchValue, setHeaderSearchValue } =
+    useContext(HeaderSearchContext);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -11,8 +11,7 @@ function Search({
   };
 
   const handleSearchClick = () => {
-    const searchValue = localStorage.getItem('search') || '';
-    onSearchChange(searchValue);
+    setHeaderSearchValue(localStorage.getItem('search') || '');
   };
 
   return (
@@ -23,7 +22,7 @@ function Search({
         placeholder="Please enter a data..."
         aria-label="Search"
         aria-describedby="basic-addon2"
-        defaultValue={getSearchValue}
+        defaultValue={headerSearchValue}
         onChange={handleInputChange}
       />
       <div className="input-group-append">
