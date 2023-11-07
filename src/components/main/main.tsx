@@ -9,6 +9,7 @@ import { AppRoute } from '../../const';
 import InputLimit from '../input-limit/input-limit';
 import { useContext } from 'react';
 import { HeaderSearchContext } from '../../util/contextAPI/header-search-value';
+import { HeroListContext } from '../../util/contextAPI/hero-list';
 
 const PAGE_DEFAULT = 1;
 const HERO_LIMIT = 10;
@@ -99,13 +100,13 @@ export default function Main() {
       <div className="main__container">
         <h1 className="h1 text-center my-3">Star Wars Heroes</h1>
         <div className="pagination d-flex justify-content-center gap-3">
-          {hero.length > 0 ? (
+          {hero.length > 0 && (
             <Pagination
               fetchData={data}
               page={currentPage}
               onPageChange={handlePageChange}
             />
-          ) : null}
+          )}
           <InputLimit onLimitChange={handleLimitChange} />
         </div>
         {loading ? (
@@ -119,12 +120,14 @@ export default function Main() {
               {hero.length > 0 ? (
                 hero.map((person, index) => (
                   <li key={person['name'] + index} className="list-group w-25">
-                    <Link
-                      className="card-link"
-                      to={`${AppRoute.Hero}/${person['name']}`}
-                    >
-                      <HeroItem person={person} />
-                    </Link>
+                    <HeroListContext.Provider value={{ person }}>
+                      <Link
+                        className="card-link"
+                        to={`${AppRoute.Hero}/${person['name']}`}
+                      >
+                        <HeroItem />
+                      </Link>
+                    </HeroListContext.Provider>
                   </li>
                 ))
               ) : (

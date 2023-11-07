@@ -1,7 +1,9 @@
 import './hero-item.scss';
-import { HeroItemProps } from './hero-item.types';
+import { HeroListContext } from '../../util/contextAPI/hero-list';
+import { useContext } from 'react';
 
-export default function HeroItem({ person }: HeroItemProps) {
+export default function HeroItem() {
+  const { person } = useContext(HeroListContext);
   const { name } = person;
 
   return (
