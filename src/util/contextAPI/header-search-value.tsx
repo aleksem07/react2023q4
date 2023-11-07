@@ -5,4 +5,10 @@ type HeaderSearchValue = {
   setHeaderSearchValue: (searchValue: string) => void;
 };
 
-export const HeaderSearchContext = createContext({} as HeaderSearchValue);
+const initialState = {
+  headerSearchValue: '',
+  setHeaderSearchValue: () => {},
+};
+
+export const HeaderSearchContext =
+  createContext<HeaderSearchValue>(initialState);
