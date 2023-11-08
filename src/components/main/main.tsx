@@ -7,9 +7,8 @@ import { Loader } from '../loader/loader';
 import HeroItem from '../hero-item/hero-item';
 import { AppRoute } from '../../const';
 import InputLimit from '../input-limit/input-limit';
-import { useContext } from 'react';
-import { HeaderSearchContext } from '../../util/contextAPI/header-search-value';
 import { HeroListContext } from '../../util/contextAPI/hero-list';
+import { useSearch } from '../../util/contextAPI/header-search-value';
 
 const PAGE_DEFAULT = 1;
 const HERO_LIMIT = 10;
@@ -17,7 +16,7 @@ const HERO_LIMIT = 10;
 export default function Main() {
   const navigate = useNavigate();
   const listItemsRef = useRef<HTMLUListElement>(null);
-  const { headerSearchValue } = useContext(HeaderSearchContext);
+  const { headerSearchValue } = useSearch();
   const [hero, setHero] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(PAGE_DEFAULT);

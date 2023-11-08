@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Main from './components/main/main';
 import ErrorBoundary from './components/error-boundary/errorBoundary';
 import { AppRoute } from './const';
@@ -6,18 +5,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './layout/layout';
 import PageNotFound from './pages/not-found';
 import HeroCard from './components/hero-card/hero-card';
-import { HeaderSearchContext } from './util/contextAPI/header-search-value';
+import { SearchHeroProvider } from './util/contextAPI/header-search-value';
 
 export default function App() {
-  const [headerSearchValue, setHeaderSearchValue] = useState(
-    localStorage.getItem('search') || ''
-  );
-
   return (
     <BrowserRouter>
-      <HeaderSearchContext.Provider
-        value={{ headerSearchValue, setHeaderSearchValue }}
-      >
+      <SearchHeroProvider>
         <Routes>
           <Route element={<Layout />}>
             <Route
@@ -35,7 +28,7 @@ export default function App() {
             <Route path={AppRoute.Page404} element={<PageNotFound />} />
           </Route>
         </Routes>
-      </HeaderSearchContext.Provider>
+      </SearchHeroProvider>
     </BrowserRouter>
   );
 }

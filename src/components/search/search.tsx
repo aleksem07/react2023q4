@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
-import { HeaderSearchContext } from '../../util/contextAPI/header-search-value';
+import React from 'react';
+import { useSearch } from '../../util/contextAPI/header-search-value';
 
 function Search() {
-  const { headerSearchValue, setHeaderSearchValue } =
-    useContext(HeaderSearchContext);
+  const { headerSearchValue, setHeaderSearchValue } = useSearch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
