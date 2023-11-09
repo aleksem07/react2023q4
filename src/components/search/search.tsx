@@ -1,15 +1,18 @@
 import React from 'react';
 import { useSearch } from '../../util/contextAPI/header-search-value';
+import { useState } from 'react';
 
 function Search() {
   const { headerSearchValue, setHeaderSearchValue } = useSearch();
+  const [value, setValue] = useState(headerSearchValue);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    localStorage.setItem('search', value);
+    setValue(value);
   };
 
   const handleSearchClick = () => {
+    localStorage.setItem('search', value);
     setHeaderSearchValue(localStorage.getItem('search') || '');
   };
 
