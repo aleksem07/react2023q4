@@ -10,7 +10,7 @@ function Pagination({ fetchData, page, onPageChange }: PaginationProps) {
 
   return (
     <>
-      <nav aria-label="...">
+      <nav data-testid="pagination">
         <ul className="pagination justify-content-center gap-2">
           {fetchData.previous !== null && page > 1 ? (
             <>
