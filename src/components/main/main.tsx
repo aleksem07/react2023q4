@@ -93,7 +93,7 @@ export default function Main() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(data);
+
   return (
     <div className="main p-0 pb-0 container">
       <div className="main__container">
