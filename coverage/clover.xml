@@ -1,33 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699402407632" clover="3.2.0">
-  <project timestamp="1699402407633" name="All files">
-    <metrics statements="10" coveredstatements="7" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="2" elements="17" coveredelements="9" complexity="0" loc="10" ncloc="10" packages="3" files="3" classes="3"/>
-    <package name="components.header">
+<coverage generated="1699556898361" clover="3.2.0">
+  <project timestamp="1699556898361" name="All files">
+    <metrics statements="21" coveredstatements="14" conditionals="6" coveredconditionals="1" methods="9" coveredmethods="5" elements="36" coveredelements="20" complexity="0" loc="21" ncloc="21" packages="6" files="6" classes="6"/>
+    <package name="src">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="const.ts" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/const.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.header">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="header.tsx" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/components/header/header.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.search">
+      <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="1"/>
+      <file name="search.tsx" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/components/search/search.tsx">
+        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="16" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.layout">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="layout.tsx" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/layout/layout.tsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="components.search">
-      <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="1"/>
-      <file name="search.tsx" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/components/search/search.tsx">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="1"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="17" count="1" type="stmt"/>
+    <package name="src.pages">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="not-found.tsx" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/pages/not-found.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="2" type="stmt"/>
       </file>
     </package>
-    <package name="util.contextAPI">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+    <package name="src.util.contextAPI">
+      <metrics statements="11" coveredstatements="7" conditionals="4" coveredconditionals="1" methods="3" coveredmethods="1"/>
       <file name="header-search-value.tsx" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/util/contextAPI/header-search-value.tsx">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
+        <metrics statements="11" coveredstatements="7" conditionals="4" coveredconditionals="1" methods="3" coveredmethods="1"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="41" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
       </file>
     </package>
   </project>
