@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,32 +118,50 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,33 +197,42 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import getHeroesAll from '../../services/heroes/heroes';
 &nbsp;
-function <span class="fstat-no" title="function not covered" >HeroCard(</span>) {
-  const { id } = <span class="cstat-no" title="statement not covered" >useParams();</span>
-  const [hero, setHero] = <span class="cstat-no" title="statement not covered" >useState&lt;Hero | null&gt;(null);</span>
+function HeroCard() {
+  const { id } = useParams();
+  const [hero, setHero] = useState&lt;Hero | null&gt;(null);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setHero(null);</span>
-    const fetchHeroes = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      try {</span>
-        const heroes = <span class="cstat-no" title="statement not covered" >await getHeroesAll(`${id}`);</span>
+  useEffect(() =&gt; {
+    setHero(null);
+    const fetchHeroes = async () =&gt; {
+      try {
+        const heroes = await getHeroesAll(`${id}`);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        setHero(heroes.results[0] as Hero);</span>
+        setHero(heroes.results[0] as Hero);
       } catch (error) {
-<span class="cstat-no" title="statement not covered" >        console.error('Error fetching data:', error);</span>
+        console.error('Error fetching data:', error);
       }
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    fetchHeroes();</span>
+    fetchHeroes();
   }, [id]);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return hero === null ? (</span>
-    &lt;div className="container hero-card mx-5 text-left p-2"&gt;
+  return hero === null ? (
+    &lt;div
+      data-testid="hero-card--null"
+      className="container hero-card mx-5 text-left p-2"
+    &gt;
       &lt;p&gt;{id} is loading...&lt;/p&gt;
       &lt;p&gt;Please, wait... &lt;/p&gt;
+      &lt;Link className="btn btn-secondary bg-dark mt-5" to="/"&gt;
+        close
+      &lt;/Link&gt;
     &lt;/div&gt;
   ) : (
-    &lt;&gt;
-      &lt;div className="container hero-card mx-5 text-left"&gt;
+<span class="branch-1 cbranch-no" title="branch not covered" >    &lt;&gt;</span>
+      &lt;div
+        data-testid="hero-card"
+        className="container hero-card mx-5 text-left"
+      &gt;
         &lt;h2 className="h2 mt-3 p-2 border-bottom bg-dark rounded"&gt;Info&lt;/h2&gt;
         &lt;p&gt;name: {hero['name']}&lt;/p&gt;
         &lt;p&gt;height: {hero['height']}&lt;/p&gt;
@@ -218,11 +245,11 @@ function <span class="fstat-no" title="function not covered" >HeroCard(</span>) 
           eye color: {hero['eye_color']}
         &lt;/p&gt;
         &lt;p&gt;gender: {hero['gender']}&lt;/p&gt;
-&nbsp;
         &lt;Link className="btn btn-secondary bg-dark mt-5" to="/"&gt;
           close
         &lt;/Link&gt;
       &lt;/div&gt;
+      ;
     &lt;/&gt;
   );
 }
@@ -235,7 +262,7 @@ export default HeroCard;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-09T18:57:25.058Z
+                at 2023-11-10T15:47:58.487Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

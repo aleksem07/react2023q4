@@ -24,13 +24,22 @@ function HeroCard() {
   }, [id]);
 
   return hero === null ? (
-    <div className="container hero-card mx-5 text-left p-2">
+    <div
+      data-testid="hero-card--null"
+      className="container hero-card mx-5 text-left p-2"
+    >
       <p>{id} is loading...</p>
       <p>Please, wait... </p>
+      <Link className="btn btn-secondary bg-dark mt-5" to="/">
+        close
+      </Link>
     </div>
   ) : (
     <>
-      <div className="container hero-card mx-5 text-left">
+      <div
+        data-testid="hero-card"
+        className="container hero-card mx-5 text-left"
+      >
         <h2 className="h2 mt-3 p-2 border-bottom bg-dark rounded">Info</h2>
         <p>name: {hero['name']}</p>
         <p>height: {hero['height']}</p>
@@ -43,11 +52,11 @@ function HeroCard() {
           eye color: {hero['eye_color']}
         </p>
         <p>gender: {hero['gender']}</p>
-
         <Link className="btn btn-secondary bg-dark mt-5" to="/">
           close
         </Link>
       </div>
+      ;
     </>
   );
 }
