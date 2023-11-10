@@ -23,7 +23,7 @@ function HeroCard() {
     fetchHeroes();
   }, [id]);
 
-  return hero === null ? (
+  return !hero ? (
     <div
       data-testid="hero-card--null"
       className="container hero-card mx-5 text-left p-2"

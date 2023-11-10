@@ -49,7 +49,7 @@ describe('HeroCard', () => {
     });
   });
 
-  it('closes the component on close button click', () => {
+  it('closes the component on close button click', async () => {
     const { default: mockFetch } = require('../../services/heroes/heroes');
     mockFetch.mockResolvedValue({
       results: [],
@@ -61,12 +61,11 @@ describe('HeroCard', () => {
     );
 
     const closeButtonElement = screen.getByText('close');
-    const heroCardNullElement = screen.getByTestId('hero-card--null');
 
     fireEvent.click(closeButtonElement);
 
     waitFor(() => {
-      expect(heroCardNullElement).not.toBeInTheDocument();
+      expect(screen.getByTestId('hero-card--null')).not.toBeInTheDocument();
     });
   });
 
