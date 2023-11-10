@@ -10,7 +10,7 @@ jest.mock('../../services/heroes/heroes', () => ({
 }));
 
 describe('HeroCard', () => {
-  it('should render correctly hero component', () => {
+  it('should render correctly hero component', async () => {
     const { default: mockFetch } = require('../../services/heroes/heroes');
     mockFetch.mockResolvedValue({
       results: [
@@ -35,8 +35,8 @@ describe('HeroCard', () => {
     const heroCardNullElement = screen.getByTestId('hero-card--null');
     expect(heroCardNullElement).toBeInTheDocument();
 
-    waitFor(() => {
-      expect(screen.getByTestId('hero-card--null')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByTestId('hero-card--null')).not.toBeInTheDocument();
       const heroCardElement = screen.getByTestId('hero-card');
       expect(heroCardElement).toBeInTheDocument();
 
@@ -54,22 +54,24 @@ describe('HeroCard', () => {
     mockFetch.mockResolvedValue({
       results: [],
     });
+
     render(
       <MemoryRouter>
         <HeroCard />
       </MemoryRouter>
     );
 
-    const closeButtonElement = screen.getByText('close');
+    const closeButtonElement = screen.getByTestId('close');
+    expect(closeButtonElement).toBeInTheDocument();
 
-    fireEvent.click(closeButtonElement);
+    fireEvent.submit(closeButtonElement);
 
     waitFor(() => {
-      expect(screen.getByTestId('hero-card--null')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('hero-card--null')).toBeNull();
     });
   });
 
-  it('throw Error fetching data', () => {
+  it('throw Error fetching data', async () => {
     const mockedConsoleError = jest.spyOn(console, 'error');
     mockedConsoleError.mockImplementation(() => {});
 
@@ -82,7 +84,7 @@ describe('HeroCard', () => {
       </MemoryRouter>
     );
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(mockedConsoleError).toHaveBeenCalledWith(
         'Error fetching data:',
         expect.any(Error)

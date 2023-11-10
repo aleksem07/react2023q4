@@ -30,7 +30,11 @@ function HeroCard() {
     >
       <p>{id} is loading...</p>
       <p>Please, wait... </p>
-      <Link className="btn btn-secondary bg-dark mt-5" to="/">
+      <Link
+        data-testid="close"
+        className="btn btn-secondary bg-dark mt-5"
+        to="/1"
+      >
         close
       </Link>
     </div>
@@ -52,7 +56,7 @@ function HeroCard() {
           eye color: {hero['eye_color']}
         </p>
         <p>gender: {hero['gender']}</p>
-        <Link className="btn btn-secondary bg-dark mt-5" to="/">
+        <Link className="btn btn-secondary bg-dark mt-5" to="/1">
           close
         </Link>
       </div>
