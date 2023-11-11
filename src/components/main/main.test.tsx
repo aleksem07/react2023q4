@@ -3,6 +3,7 @@ import { screen, render, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import HeroCard from '../hero-card/hero-card';
+import { HeroListProvider } from '../../util/contextAPI/hero-list';
 
 jest.mock('../../services/heroes/heroes', () => ({
   __esModule: true,
@@ -49,7 +50,9 @@ describe('Main', () => {
 
     render(
       <MemoryRouter>
-        <Main />
+        <HeroListProvider>
+          <Main />
+        </HeroListProvider>
       </MemoryRouter>
     );
 

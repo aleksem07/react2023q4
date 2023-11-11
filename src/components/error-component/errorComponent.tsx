@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function ErrorComponent(): JSX.Element {
-  const [error, setError] = useState(false);
+  const [hasError, setError] = useState(false);
 
   const handlerErrorClick = () => {
     throw new Error('Error button clicked');
@@ -11,7 +11,7 @@ export default function ErrorComponent(): JSX.Element {
     setError(true);
   };
 
-  if (error) {
+  if (hasError) {
     handlerErrorClick();
   }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699713604437" clover="3.2.0">
-  <project timestamp="1699713604437" name="All files">
-    <metrics statements="97" coveredstatements="90" conditionals="34" coveredconditionals="30" methods="33" coveredmethods="30" elements="164" coveredelements="150" complexity="0" loc="97" ncloc="97" packages="12" files="13" classes="13"/>
+<coverage generated="1699716192648" clover="3.2.0">
+  <project timestamp="1699716192648" name="All files">
+    <metrics statements="97" coveredstatements="93" conditionals="34" coveredconditionals="30" methods="33" coveredmethods="31" elements="164" coveredelements="154" complexity="0" loc="97" ncloc="97" packages="12" files="13" classes="13"/>
     <package name="src">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="const.ts" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/const.ts">
@@ -144,7 +144,7 @@
       </file>
     </package>
     <package name="src.util.contextAPI">
-      <metrics statements="22" coveredstatements="17" conditionals="6" coveredconditionals="3" methods="6" coveredmethods="5"/>
+      <metrics statements="22" coveredstatements="20" conditionals="6" coveredconditionals="3" methods="6" coveredmethods="6"/>
       <file name="header-search-value.tsx" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/util/contextAPI/header-search-value.tsx">
         <metrics statements="11" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <line num="12" count="4" type="stmt"/>
@@ -160,13 +160,13 @@
         <line num="45" count="23" type="stmt"/>
       </file>
       <file name="hero-list.tsx" path="/mnt/c28263e1-63fe-4a96-8b19-f806d918c58b/RS School/stage3/react2023q4/react2023q4/src/util/contextAPI/hero-list.tsx">
-        <metrics statements="11" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="2"/>
+        <metrics statements="11" coveredstatements="10" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
         <line num="16" count="2" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
         <line num="41" count="2" type="stmt"/>
         <line num="42" count="22" type="stmt"/>
         <line num="44" count="22" type="cond" truecount="1" falsecount="1"/>

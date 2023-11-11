@@ -18,7 +18,7 @@ export default function Main() {
   const listItemsRef = useRef<HTMLUListElement>(null);
   const { headerSearchValue } = useSearch();
   const [hero, setHero] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(PAGE_DEFAULT);
   const [limit, setLimit] = useState(HERO_LIMIT);
   const [data, setData] = useState({
@@ -92,7 +92,7 @@ export default function Main() {
           )}
           <InputLimit onLimitChange={handleLimitChange} />
         </div>
-        {loading ? (
+        {isLoading ? (
           <Loader />
         ) : (
           <>

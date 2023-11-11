@@ -13,6 +13,7 @@ function InputLimit({ onLimitChange }: InputLimitProps) {
         className="m-0 p-0 border-0 rounded-2"
         name="limit"
         id="limit"
+        style={{ cursor: 'pointer' }}
       >
         <option defaultValue="10">10</option>
         <option value="9">9</option>
