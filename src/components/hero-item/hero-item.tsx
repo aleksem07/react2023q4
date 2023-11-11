@@ -1,11 +1,14 @@
 import './hero-item.scss';
-import { HeroListContext } from '../../util/contextAPI/hero-list';
-import { useContext } from 'react';
 
-export default function HeroItem() {
-  const { person } = useContext(HeroListContext);
-  const { name } = person;
+type PersonProps = {
+  name: string;
+};
 
+type initialStateProps = {
+  person: PersonProps | null;
+};
+
+export default function HeroItem({ person }: initialStateProps) {
   return (
     <>
       <img
@@ -19,7 +22,7 @@ export default function HeroItem() {
           data-testid="hero-item"
           className="h4 hero-item pt-2 pb-2 text-center text-bg-dark rounded-5"
         >
-          {name}
+          {person && person.name}
         </h3>
       </div>
     </>

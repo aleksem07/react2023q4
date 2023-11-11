@@ -124,7 +124,10 @@ export default function Main() {
                         className="card-link"
                         to={`${AppRoute.Hero}/${person['name']}`}
                       >
-                        <HeroItem />
+                        <HeroItem
+                          key={person['name'] + index}
+                          person={person}
+                        />
                       </Link>
                     </HeroListContext.Provider>
                   </li>

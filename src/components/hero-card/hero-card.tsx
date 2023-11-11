@@ -6,6 +6,7 @@ import getHeroesAll from '../../services/heroes/heroes';
 
 function HeroCard() {
   const { id } = useParams();
+  console.log(id);
   const [hero, setHero] = useState<Hero | null>(null);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function HeroCard() {
       <Link
         data-testid="close"
         className="btn btn-secondary bg-dark mt-5"
-        to="/1"
+        to="/"
       >
         close
       </Link>
@@ -56,7 +57,7 @@ function HeroCard() {
           eye color: {hero['eye_color']}
         </p>
         <p>gender: {hero['gender']}</p>
-        <Link className="btn btn-secondary bg-dark mt-5" to="/1">
+        <Link className="btn btn-secondary bg-dark mt-5" to="/">
           close
         </Link>
       </div>
