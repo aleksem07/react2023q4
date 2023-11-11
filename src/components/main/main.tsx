@@ -95,7 +95,7 @@ export default function Main() {
   }, []);
 
   return (
-    <div className="main p-0 pb-0 container">
+    <div data-testid="main" className="main p-0 pb-0 container">
       <div className="main__container">
         <h1 className="h1 text-center my-3">Star Wars Heroes</h1>
         <div className="pagination d-flex justify-content-center gap-3">
