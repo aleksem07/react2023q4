@@ -29,40 +29,23 @@ export default function Main() {
   const { setPerson } = useHeroList();
 
   useEffect(() => {
-    const fetchHeroes = async (page: number) => {
-      setLoading(true);
-      try {
-        const heroes = await getHeroesAll(headerSearchValue, page);
-        setData(heroes);
-
-        if (heroes) {
-          setHero(heroes.results.slice(0, limit));
-          navigate(`/?page=${currentPage}`);
-          setCurrentPage(page);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHeroes(currentPage);
+    handlePageChange(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerSearchValue, limit]);
 
-  const handlePageChange = async (newPage: number) => {
+  const handlePageChange = async (page: number) => {
     setLoading(true);
-    setCurrentPage(newPage);
+    setCurrentPage(page);
     navigate(`/?page=${currentPage}`);
 
     try {
-      const heroes = await getHeroesAll(headerSearchValue, newPage);
+      const heroes = await getHeroesAll(headerSearchValue, page);
       setData(heroes);
 
       if (heroes) {
         setHero(heroes.results.slice(0, limit));
-        navigate(`/?page=${newPage}`);
+        navigate(`/?page=${page}`);
+        setCurrentPage(page);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -77,7 +60,7 @@ export default function Main() {
 
   useEffect(() => {
     const handleClickCloseModal = (event: MouseEvent) => {
-      const target = event.target as HTMLElement as HTMLElement;
+      const target = event.target as HTMLElement;
 
       if (
         listItemsRef.current &&
