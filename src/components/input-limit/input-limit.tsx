@@ -8,6 +8,7 @@ function InputLimit({ onLimitChange }: InputLimitProps) {
   return (
     <>
       <select
+        data-testid="input-limit"
         onChange={(e) => handleLimitChange(Number(e.target.value))}
         className="m-0 p-0 border-0 rounded-2"
         name="limit"
