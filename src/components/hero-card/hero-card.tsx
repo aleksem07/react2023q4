@@ -1,19 +1,19 @@
 import './hero-card.scss';
 import { Hero } from './hero-card.types';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import getHeroesAll from '../../services/heroes/heroes';
+import { useHeroList } from '../../util/contextAPI/hero-list';
 
 function HeroCard() {
-  const { id } = useParams();
-  console.log(id);
+  const { person } = useHeroList();
   const [hero, setHero] = useState<Hero | null>(null);
 
   useEffect(() => {
     setHero(null);
     const fetchHeroes = async () => {
       try {
-        const heroes = await getHeroesAll(`${id}`);
+        const heroes = await getHeroesAll(`${person.name}`);
 
         setHero(heroes.results[0] as Hero);
       } catch (error) {
@@ -22,14 +22,14 @@ function HeroCard() {
     };
 
     fetchHeroes();
-  }, [id]);
+  }, [person.name]);
 
   return !hero ? (
     <div
       data-testid="hero-card--null"
       className="container hero-card mx-5 text-left p-2"
     >
-      <p>{id} is loading...</p>
+      <p>{person.name} is loading...</p>
       <p>Please, wait... </p>
       <Link
         data-testid="close"

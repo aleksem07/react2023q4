@@ -7,8 +7,8 @@ import { Loader } from '../loader/loader';
 import HeroItem from '../hero-item/hero-item';
 import { AppRoute } from '../../const';
 import InputLimit from '../input-limit/input-limit';
-import { HeroListContext } from '../../util/contextAPI/hero-list';
 import { useSearch } from '../../util/contextAPI/header-search-value';
+import { useHeroList } from '../../util/contextAPI/hero-list';
 
 const PAGE_DEFAULT = 1;
 const HERO_LIMIT = 10;
@@ -26,6 +26,7 @@ export default function Main() {
     previous: null,
     results: [],
   });
+  const { setPerson } = useHeroList();
 
   useEffect(() => {
     const fetchHeroes = async (page: number) => {
@@ -118,18 +119,17 @@ export default function Main() {
             >
               {hero.length > 0 ? (
                 hero.map((person, index) => (
-                  <li key={person['name'] + index} className="list-group w-25">
-                    <HeroListContext.Provider value={{ person }}>
-                      <Link
-                        className="card-link"
-                        to={`${AppRoute.Hero}/${person['name']}`}
-                      >
-                        <HeroItem
-                          key={person['name'] + index}
-                          person={person}
-                        />
-                      </Link>
-                    </HeroListContext.Provider>
+                  <li
+                    onClick={() => setPerson(person)}
+                    key={person['name'] + index}
+                    className="list-group w-25"
+                  >
+                    <Link
+                      className="card-link"
+                      to={`${AppRoute.Hero}/${person['name']}`}
+                    >
+                      <HeroItem key={person['name'] + index} person={person} />
+                    </Link>
                   </li>
                 ))
               ) : (
@@ -139,7 +139,7 @@ export default function Main() {
           </>
         )}
       </div>
-      <Outlet context={{ hero }} />
+      <Outlet />
     </div>
   );
 }

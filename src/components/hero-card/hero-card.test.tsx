@@ -71,26 +71,26 @@ describe('HeroCard', () => {
     });
   });
 
-  // it('throw Error fetching data', async () => {
-  //   const mockedConsoleError = jest.spyOn(console, 'error');
-  //   mockedConsoleError.mockImplementation(() => {});
+  it('throw Error fetching data', async () => {
+    const mockedConsoleError = jest.spyOn(console, 'error');
+    mockedConsoleError.mockImplementation(() => {});
 
-  //   const { default: mockFetch } = require('../../services/heroes/heroes');
-  //   mockFetch.mockRejectedValue(new Error('Mocked fetch error'));
+    const { default: mockFetch } = require('../../services/heroes/heroes');
+    mockFetch.mockRejectedValue(new Error('Mocked fetch error'));
 
-  //   render(
-  //     <MemoryRouter>
-  //       <HeroCard />
-  //     </MemoryRouter>
-  //   );
+    render(
+      <MemoryRouter>
+        <HeroCard />
+      </MemoryRouter>
+    );
 
-  //   await waitFor(() => {
-  //     expect(mockedConsoleError).toHaveBeenCalledWith(
-  //       'Error fetching data:',
-  //       expect.any(Error)
-  //     );
-  //   });
+    await waitFor(() => {
+      expect(mockedConsoleError).toHaveBeenCalledWith(
+        'Error fetching data:',
+        expect.any(Error)
+      );
+    });
 
-  //   mockedConsoleError.mockRestore();
-  // });
+    mockedConsoleError.mockRestore();
+  });
 });

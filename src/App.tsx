@@ -6,28 +6,31 @@ import Layout from './layout/layout';
 import PageNotFound from './pages/not-found';
 import HeroCard from './components/hero-card/hero-card';
 import { SearchHeroProvider } from './util/contextAPI/header-search-value';
+import { HeroListProvider } from './util/contextAPI/hero-list';
 
 export default function App() {
   return (
     <BrowserRouter>
       <SearchHeroProvider>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route
-              path={AppRoute.Root}
-              element={
-                <>
-                  <ErrorBoundary>
-                    <Main />
-                  </ErrorBoundary>
-                </>
-              }
-            >
-              <Route path={`${AppRoute.Hero}/:id`} element={<HeroCard />} />
+        <HeroListProvider>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route
+                path={AppRoute.Root}
+                element={
+                  <>
+                    <ErrorBoundary>
+                      <Main />
+                    </ErrorBoundary>
+                  </>
+                }
+              >
+                <Route path={`${AppRoute.Hero}/:id`} element={<HeroCard />} />
+              </Route>
+              <Route path={AppRoute.Page404} element={<PageNotFound />} />
             </Route>
-            <Route path={AppRoute.Page404} element={<PageNotFound />} />
-          </Route>
-        </Routes>
+          </Routes>
+        </HeroListProvider>
       </SearchHeroProvider>
     </BrowserRouter>
   );
