@@ -1,7 +1,8 @@
 import Main from './main';
-import { screen, render, waitFor } from '@testing-library/react';
+import { screen, render, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
+import HeroCard from '../hero-card/hero-card';
 
 jest.mock('../../services/heroes/heroes', () => ({
   __esModule: true,
@@ -75,6 +76,61 @@ describe('Main', () => {
       const noResultsElement = screen.getByText(/Sorry... No results found/i);
 
       expect(noResultsElement).toBeInTheDocument();
+    });
+  });
+
+  it('throw error', async () => {
+    const { default: mockFetch } = require('../../services/heroes/heroes');
+    mockFetch.mockRejectedValue(new Error('Error'));
+
+    render(
+      <MemoryRouter>
+        <Main />
+      </MemoryRouter>
+    );
+
+    await waitFor(() => {
+      const errorElement = screen.getByText(/Sorry... No results found/i);
+
+      expect(errorElement).toBeInTheDocument();
+    });
+  });
+
+  it('handleClickCloseModal navigates to "/" when clicking outside the listItemsRef', async () => {
+    const { default: mockFetch } = require('../../services/heroes/heroes');
+    mockFetch.mockResolvedValue({
+      results: [
+        {
+          name: 'R2-D2',
+          height: '96',
+          mass: '32',
+          hair_color: 'n/a',
+          skin_color: 'white, blue',
+          eye_color: 'red',
+          gender: 'n/a',
+        },
+      ],
+    });
+    render(
+      <MemoryRouter>
+        <Main />
+        <HeroCard />
+      </MemoryRouter>
+    );
+
+    const listItemsRef = screen.getByTestId('main');
+
+    await waitFor(() => {
+      const openCard = screen.getByTestId('hero-item');
+      fireEvent.click(openCard);
+      expect(screen.getByTestId('hero-card')).toBeInTheDocument();
+    });
+
+    fireEvent.click(listItemsRef);
+
+    await waitFor(() => {
+      expect(screen.getByTestId('hero-card')).toBeInTheDocument();
+      expect(window.location.pathname).toBe('/');
     });
   });
 });
