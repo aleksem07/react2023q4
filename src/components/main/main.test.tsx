@@ -1,5 +1,6 @@
 import Main from './main';
-import { screen, render, waitFor, fireEvent } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import HeroCard from '../hero-card/hero-card';
@@ -137,11 +138,11 @@ describe('Main', () => {
 
     await waitFor(() => {
       const openCard = screen.getByTestId('hero-item');
-      fireEvent.click(openCard);
+      userEvent.click(openCard);
       expect(screen.getByTestId('hero-card')).toBeInTheDocument();
     });
 
-    fireEvent.click(listItemsRef);
+    userEvent.click(listItemsRef);
 
     await waitFor(() => {
       expect(screen.getByTestId('hero-card')).toBeInTheDocument();
