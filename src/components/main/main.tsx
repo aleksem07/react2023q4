@@ -62,26 +62,6 @@ export default function Main() {
     setLimit(newLimit);
   };
 
-  useEffect(() => {
-    const handleClickCloseModal = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-
-      if (
-        listItemsRef.current &&
-        !listItemsRef.current.contains(target.parentNode as Node)
-      ) {
-        navigate('/');
-      }
-    };
-
-    document.addEventListener('click', handleClickCloseModal);
-
-    return () => {
-      document.removeEventListener('click', handleClickCloseModal);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div data-testid="main" className="main p-0 pb-0 container">
       <div className="main__container">
