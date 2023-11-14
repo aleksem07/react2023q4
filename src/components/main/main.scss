@@ -14,7 +14,9 @@
   background-color: #7f878e;
   border-radius: 10%;
   transition: all 0.3s ease-in;
-  box-shadow: -5px 5px 5px 0 rgba(0, 0, 0, 0.36), -10px 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow:
+    -5px 5px 5px 0 rgba(0, 0, 0, 0.36),
+    -10px 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .card-link img {

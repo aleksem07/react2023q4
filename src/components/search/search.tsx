@@ -15,7 +15,6 @@ function Search() {
 
   return (
     <div className="input-group p-3 gap-4">
-      <p>{searchValue}</p>
       <input
         type="text"
         className="form-control"
