@@ -12,7 +12,7 @@
     "format:fix": "prettier --write --color **/*.{scss,ts,tsx}",
     "preview": "vite preview",
     "deploy": "npm run build && gh-pages -d dist",
-    "prepare": "cd .. && husky install",
+    "prepare": "husky install",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },

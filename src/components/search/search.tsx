@@ -1,31 +1,31 @@
 import React from 'react';
-import { useSearch } from '../../util/contextAPI/header-search-value';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchValue } from '../../features/search/searchSlice';
+import { RootState } from '../../store/store';
 
 function Search() {
-  const { headerSearchValue, setHeaderSearchValue } = useSearch();
-  const [value, setValue] = useState(headerSearchValue);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setValue(value);
-  };
+  const dispatch = useDispatch();
+  const searchValue = useSelector(
+    (state: RootState) => state.search.searchValue
+  );
 
   const handleSearchClick = () => {
-    localStorage.setItem('search', value);
-    setHeaderSearchValue(localStorage.getItem('search') || '');
+    localStorage.setItem('search', searchValue);
   };
 
   return (
     <div className="input-group p-3 gap-4">
+      <p>{searchValue}</p>
       <input
         type="text"
         className="form-control"
         placeholder="Please enter a data..."
         aria-label="Search"
         aria-describedby="basic-addon2"
-        defaultValue={headerSearchValue}
-        onChange={handleInputChange}
+        defaultValue={searchValue}
+        onChange={(e) => {
+          dispatch(setSearchValue(e.target.value));
+        }}
       />
       <div className="input-group-append">
         <button

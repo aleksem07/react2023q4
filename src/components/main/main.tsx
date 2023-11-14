@@ -7,8 +7,9 @@ import { Loader } from '../loader/loader';
 import HeroItem from '../hero-item/hero-item';
 import { AppRoute } from '../../const';
 import InputLimit from '../input-limit/input-limit';
-import { useSearch } from '../../util/contextAPI/header-search-value';
 import { useHeroList } from '../../util/contextAPI/hero-list';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const PAGE_DEFAULT = 1;
 const HERO_LIMIT = 10;
@@ -16,7 +17,7 @@ const HERO_LIMIT = 10;
 export default function Main() {
   const navigate = useNavigate();
   const listItemsRef = useRef<HTMLUListElement>(null);
-  const { headerSearchValue } = useSearch();
+
   const [hero, setHero] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(PAGE_DEFAULT);
@@ -27,11 +28,14 @@ export default function Main() {
     results: [],
   });
   const { setPerson } = useHeroList();
+  const searchValue = useSelector(
+    (state: RootState) => state.search.searchValue
+  );
 
   useEffect(() => {
     handlePageChange(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerSearchValue, limit]);
+  }, [localStorage.getItem('search'), limit]);
 
   const handlePageChange = async (page: number) => {
     setLoading(true);
@@ -39,7 +43,7 @@ export default function Main() {
     navigate(`/?page=${currentPage}`);
 
     try {
-      const heroes = await getHeroesAll(headerSearchValue, page);
+      const heroes = await getHeroesAll(searchValue, page);
       setData(heroes);
 
       if (heroes) {
