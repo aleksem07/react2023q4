@@ -4,6 +4,8 @@ import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import HeroCard from '../hero-card/hero-card';
 import { HeroListProvider } from '../../util/contextAPI/hero-list';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 jest.mock('../../services/heroes/heroes', () => ({
   __esModule: true,
@@ -13,9 +15,11 @@ jest.mock('../../services/heroes/heroes', () => ({
 describe('Main', () => {
   it('should render correctly', () => {
     render(
-      <MemoryRouter>
-        <Main />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Main />
+        </MemoryRouter>
+      </Provider>
     );
 
     const mainElement = screen.getByTestId('main');
@@ -49,11 +53,13 @@ describe('Main', () => {
     });
 
     render(
-      <MemoryRouter>
-        <HeroListProvider>
-          <Main />
-        </HeroListProvider>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <HeroListProvider>
+            <Main />
+          </HeroListProvider>
+        </MemoryRouter>
+      </Provider>
     );
 
     const mainElement = screen.getByTestId('main');
@@ -70,9 +76,11 @@ describe('Main', () => {
     });
 
     render(
-      <MemoryRouter>
-        <Main />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Main />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => {
@@ -87,9 +95,11 @@ describe('Main', () => {
     mockFetch.mockRejectedValue(new Error('Error'));
 
     render(
-      <MemoryRouter>
-        <Main />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Main />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => {
@@ -115,10 +125,12 @@ describe('Main', () => {
       ],
     });
     render(
-      <MemoryRouter>
-        <Main />
-        <HeroCard />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Main />
+          <HeroCard />
+        </MemoryRouter>
+      </Provider>
     );
 
     const listItemsRef = screen.getByTestId('main');

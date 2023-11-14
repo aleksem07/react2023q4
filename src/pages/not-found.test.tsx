@@ -4,6 +4,8 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import Layout from '../layout/layout';
 import { AppRoute } from '../const';
+import { Provider } from 'react-redux';
+import { store } from '../store/store';
 
 describe('PageNotFound', () => {
   it('should render correct', () => {
@@ -36,12 +38,14 @@ describe('PageNotFound', () => {
 
   it('don`t render 404 page when navigating to an invalid route', () => {
     render(
-      <MemoryRouter initialEntries={[AppRoute.Root]}>
-        <Routes>
-          <Route path="/" element={<Layout />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={[AppRoute.Root]}>
+          <Routes>
+            <Route path="/" element={<Layout />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     const notFoundMessage = screen.queryByText(/404 Page not found/i);

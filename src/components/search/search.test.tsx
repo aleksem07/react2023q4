@@ -1,7 +1,9 @@
 import Search from './search';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { SearchHeroProvider } from '../../util/contextAPI/header-search-value';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
+import { setSearchValue } from '../../features/search/searchSlice';
 
 describe('Search', () => {
   const mockSearchHero = 'C3-PO';
@@ -10,7 +12,12 @@ describe('Search', () => {
   });
 
   it('should render correctly', () => {
-    render(<Search />);
+    render(
+      <Provider store={store}>
+        <Search />
+      </Provider>
+    );
+
     const searchElement = screen.getByLabelText(/Search/i);
     const inputElement = screen.getByRole('textbox');
     const buttonElement = screen.getByRole('button');
@@ -21,7 +28,12 @@ describe('Search', () => {
   });
 
   it('Verify that clicking the Search button saves the entered value to the local storage', () => {
-    render(<Search />);
+    render(
+      <Provider store={store}>
+        <Search />
+      </Provider>
+    );
+
     const inputElement = screen.getByRole('textbox');
     const buttonElement = screen.getByRole('button');
 
@@ -37,17 +49,16 @@ describe('Search', () => {
   });
 
   it('Check that the component retrieves the value from the local storage upon mounting', () => {
-    localStorage.setItem('search', mockSearchHero);
+    store.dispatch(setSearchValue(mockSearchHero));
 
     render(
-      <SearchHeroProvider>
+      <Provider store={store}>
         <Search />
-      </SearchHeroProvider>
+      </Provider>
     );
 
     const inputElement = screen.getByRole('textbox') as HTMLInputElement;
-    const expectedValue = localStorage.getItem('search');
 
-    expect(inputElement.value).toEqual(expectedValue);
+    expect(inputElement.value).toBe(mockSearchHero);
   });
 });
