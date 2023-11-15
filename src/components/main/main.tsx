@@ -10,17 +10,20 @@ import InputLimit from '../input-limit/input-limit';
 import { useHeroList } from '../../util/contextAPI/hero-list';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { setPage } from '../../features/pagination/pagination-slice';
+import { useDispatch } from 'react-redux';
 
-const PAGE_DEFAULT = 1;
 const HERO_LIMIT = 10;
 
 export default function Main() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const listItemsRef = useRef<HTMLUListElement>(null);
-
   const [hero, setHero] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(PAGE_DEFAULT);
+  const currentPage = useSelector(
+    (state: RootState) => state.pagination.currentPage
+  );
   const [limit, setLimit] = useState(HERO_LIMIT);
   const [data, setData] = useState({
     next: null,
@@ -36,11 +39,11 @@ export default function Main() {
   useEffect(() => {
     handlePageChange(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchLS, limit]);
+  }, [searchLS, currentPage, limit]);
 
   const handlePageChange = async (page: number) => {
     setLoading(true);
-    setCurrentPage(page);
+    dispatch(setPage(page));
     navigate(`/?page=${currentPage}`);
 
     try {
@@ -50,7 +53,7 @@ export default function Main() {
       if (heroes) {
         setHero(heroes.results.slice(0, limit));
         navigate(`/?page=${page}`);
-        setCurrentPage(page);
+        dispatch(setPage(page));
       }
     } catch (error) {
       console.error('Error fetching data:', error);

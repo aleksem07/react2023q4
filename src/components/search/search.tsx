@@ -1,6 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue, setSearchLS } from '../../features/search/searchSlice';
+import {
+  setSearchValue,
+  setSearchLS,
+} from '../../features/search/search-slice';
 import { RootState } from '../../store/store';
 
 function Search() {
