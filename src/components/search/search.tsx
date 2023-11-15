@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue } from '../../features/search/searchSlice';
+import { setSearchValue, setSearchLS } from '../../features/search/searchSlice';
 import { RootState } from '../../store/store';
 
 function Search() {
@@ -8,9 +8,11 @@ function Search() {
   const searchValue = useSelector(
     (state: RootState) => state.search.searchValue
   );
+  const searchLS = useSelector((state: RootState) => state.search.searchLS);
 
   const handleSearchClick = () => {
     localStorage.setItem('search', searchValue);
+    dispatch(setSearchLS(searchLS));
   };
 
   return (

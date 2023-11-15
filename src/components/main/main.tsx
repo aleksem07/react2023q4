@@ -31,11 +31,12 @@ export default function Main() {
   const searchValue = useSelector(
     (state: RootState) => state.search.searchValue
   );
+  const searchLS = useSelector((state: RootState) => state.search.searchLS);
 
   useEffect(() => {
     handlePageChange(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [localStorage.getItem('search'), limit]);
+  }, [searchLS, limit]);
 
   const handlePageChange = async (page: number) => {
     setLoading(true);
