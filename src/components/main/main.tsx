@@ -5,7 +5,7 @@ import Pagination from '../pagination/pagination';
 import { Loader } from '../loader/loader';
 import HeroItem from '../hero-item/hero-item';
 import { AppRoute } from '../../const';
-import InputLimit from '../input-limit/input-limit';
+import { InputLimit } from '../input-limit/input-limit';
 import { useHeroList } from '../../util/contextAPI/hero-list';
 import { useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
@@ -13,7 +13,7 @@ import { setPage } from '../../features/pagination/pagination-slice';
 import { useDispatch } from 'react-redux';
 import { setHeroes, getHeroes } from '../../features/heroes/heroes-slice';
 
-const HERO_LIMIT = 10;
+// const HERO_LIMIT = 10;
 
 export default function Main() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function Main() {
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage
   );
-  const [limit, setLimit] = useState(HERO_LIMIT);
+  // const [limit, setLimit] = useState(HERO_LIMIT);
   const [data, setData] = useState({
     next: null,
     previous: null,
@@ -35,6 +35,7 @@ export default function Main() {
   );
   const searchLS = useSelector((state: RootState) => state.search.searchLS);
   const heroList = useSelector((state: RootState) => state.heroes.heroes);
+  const limit = useSelector((state: RootState) => state.limit.limit);
 
   useEffect(() => {
     handlePageChange(currentPage);
@@ -67,9 +68,9 @@ export default function Main() {
     [searchValue, currentPage, limit, dispatch, navigate]
   );
 
-  const handleLimitChange = (newLimit: number) => {
-    setLimit(newLimit);
-  };
+  // const handleLimitChange = (newLimit: number) => {
+  //   setLimit(newLimit);
+  // };
 
   return (
     <div data-testid="main" className="main p-0 pb-0 container">
@@ -83,7 +84,7 @@ export default function Main() {
               onPageChange={handlePageChange}
             />
           )}
-          <InputLimit onLimitChange={handleLimitChange} />
+          <InputLimit />
         </div>
         {isLoading ? (
           <Loader />

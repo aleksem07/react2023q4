@@ -1,22 +1,21 @@
-import { InputLimitProps } from './input-limit.types';
+import { setLimit } from '../../features/limit/limit-slice';
+import { useDispatch } from 'react-redux';
 
-function InputLimit({ onLimitChange }: InputLimitProps) {
-  const handleLimitChange = (newLimit: number) => {
-    onLimitChange(newLimit);
-  };
+export const InputLimit = () => {
+  const dispatch = useDispatch();
 
   return (
     <>
       <select
         data-testid="input-limit"
-        onChange={(e) => handleLimitChange(Number(e.target.value))}
+        onChange={(e) => dispatch(setLimit(Number(e.target.value)))}
         className="m-0 p-0 border-0 rounded-2"
         name="limit"
         id="limit"
         style={{ cursor: 'pointer' }}
       >
-        <option defaultValue="10">10</option>
-        <option value="9">9</option>
+        <option value="10">10</option>
+        <option defaultValue="9">9</option>
         <option value="8">8</option>
         <option value="7">7</option>
         <option value="6">6</option>
@@ -28,6 +27,4 @@ function InputLimit({ onLimitChange }: InputLimitProps) {
       </select>
     </>
   );
-}
-
-export default InputLimit;
+};
