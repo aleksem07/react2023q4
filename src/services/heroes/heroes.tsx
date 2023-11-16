@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const PAGE_DEFAULT = 2;
 
 async function getHeroesAll(searchValue: string, page = PAGE_DEFAULT) {
@@ -5,10 +7,9 @@ async function getHeroesAll(searchValue: string, page = PAGE_DEFAULT) {
     const url = `https://swapi.dev/api/people${
       searchValue ? `/?search=${searchValue}` : `?page=${page}`
     }`;
-    const response = await fetch(url);
-    const data = await response.json();
+    const response = await axios(url);
 
-    return await data;
+    return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
   }

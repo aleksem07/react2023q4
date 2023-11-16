@@ -7,11 +7,19 @@ const initialState = {
   status: false,
 };
 
+type getHeroesAllProps = {
+  searchValue: string;
+  page: number;
+};
+
 export const getHeroes = createAsyncThunk(
   'heroes/fetchHeroes',
-  async (value: string, { rejectWithValue, dispatch }) => {
+  async (
+    { searchValue, page }: getHeroesAllProps,
+    { rejectWithValue, dispatch }
+  ) => {
     try {
-      const heroes = await getHeroesAll(value);
+      const heroes = await getHeroesAll(searchValue, page);
       dispatch(setHeroes(heroes.results));
       return heroes;
     } catch (error) {
