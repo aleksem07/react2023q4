@@ -3,6 +3,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 describe('Pagination', () => {
   const mockFetchData = {
@@ -17,11 +19,13 @@ describe('Pagination', () => {
 
   it('should render correctly', () => {
     render(
-      <Pagination
-        fetchData={mockFetchData}
-        page={mockPage}
-        onPageChange={mockOnPageChange}
-      />
+      <Provider store={store}>
+        <Pagination
+          fetchData={mockFetchData}
+          page={mockPage}
+          onPageChange={mockOnPageChange}
+        />
+      </Provider>
     );
 
     const paginationElement = screen.getByTestId('pagination');
@@ -32,13 +36,15 @@ describe('Pagination', () => {
   it('Make sure the component updates URL query parameter when page changes', () => {
     const history = createMemoryHistory();
     render(
-      <MemoryRouter>
-        <Pagination
-          fetchData={mockFetchData}
-          page={mockPage}
-          onPageChange={mockOnPageChange}
-        />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Pagination
+            fetchData={mockFetchData}
+            page={mockPage}
+            onPageChange={mockOnPageChange}
+          />
+        </MemoryRouter>
+      </Provider>
     );
 
     const paginationElement = screen.getByTestId('pagination');
