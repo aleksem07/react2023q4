@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import getHeroesAll from '../../services/heroes/heroes';
 import { useHeroList } from '../../util/contextAPI/hero-list';
+import { v4 } from 'uuid';
 
 function HeroCard() {
   const { person } = useHeroList();
@@ -46,6 +47,7 @@ function HeroCard() {
         className="container hero-card mx-5 text-left"
       >
         <h2 className="h2 mt-3 p-2 border-bottom bg-dark rounded">Info</h2>
+        <p>id: {v4()}</p>
         <p>name: {hero['name']}</p>
         <p>height: {hero['height']}</p>
         <p>mass: {hero['mass']}</p>

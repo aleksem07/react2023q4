@@ -9,17 +9,21 @@ import { AppRoute } from '../../const';
 import InputLimit from '../input-limit/input-limit';
 import { useHeroList } from '../../util/contextAPI/hero-list';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { RootState, AppDispatch } from '../../store/store';
 import { setPage } from '../../features/pagination/pagination-slice';
 import { useDispatch } from 'react-redux';
+import {
+  setHeroes,
+  getHeroes,
+  setStatus,
+} from '../../features/heroes/heroes-slice';
 
 const HERO_LIMIT = 10;
 
 export default function Main() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const listItemsRef = useRef<HTMLUListElement>(null);
-  const [hero, setHero] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage
@@ -35,6 +39,8 @@ export default function Main() {
     (state: RootState) => state.search.searchValue
   );
   const searchLS = useSelector((state: RootState) => state.search.searchLS);
+  const heroList = useSelector((state: RootState) => state.heroes.heroes);
+  // const status = useSelector((state: RootState) => state.heroes.status);
 
   useEffect(() => {
     handlePageChange(currentPage);
@@ -43,6 +49,8 @@ export default function Main() {
 
   const handlePageChange = async (page: number) => {
     setLoading(true);
+    console.log(heroList);
+    setStatus(true);
     dispatch(setPage(page));
     navigate(`/?page=${currentPage}`);
 
@@ -50,15 +58,20 @@ export default function Main() {
       const heroes = await getHeroesAll(searchValue, page);
       setData(heroes);
 
-      if (heroes) {
-        setHero(heroes.results.slice(0, limit));
-        navigate(`/?page=${page}`);
-        dispatch(setPage(page));
-      }
+      dispatch(getHeroes(searchValue))
+        .unwrap()
+        .then((heroes) => {
+          if (heroes) {
+            dispatch(setHeroes(heroes.results.slice(0, limit)));
+            navigate(`/?page=${page}`);
+            dispatch(setPage(page));
+          }
+        });
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
+      setStatus(false);
     }
   };
 
@@ -71,7 +84,7 @@ export default function Main() {
       <div className="main__container">
         <h1 className="h1 text-center my-3">Star Wars Heroes</h1>
         <div className="pagination d-flex justify-content-center gap-3">
-          {hero.length > 0 && (
+          {heroList.length > 0 && (
             <Pagination
               fetchData={data}
               page={currentPage}
@@ -88,8 +101,8 @@ export default function Main() {
               ref={listItemsRef}
               className="container d-flex justify-content-center flex-wrap mb-3 gap-3"
             >
-              {hero.length > 0 ? (
-                hero.map((person, index) => (
+              {heroList.length > 0 ? (
+                heroList.map((person, index) => (
                   <li
                     onClick={() => setPerson(person)}
                     key={person['name'] + index}
