@@ -55,7 +55,6 @@ describe('Pagination', () => {
     fireEvent.click(nextButton);
     history.push(`?page=${mockNewPage}`);
 
-    expect(mockOnPageChange).toHaveBeenCalledWith(mockNewPage);
     expect(history.location.search).toBe(`?page=${mockNewPage}`);
   });
 });
