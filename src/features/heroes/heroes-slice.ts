@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getHeroesAll from '../../services/heroes/heroes';
-// import axios from 'axios';
 
 const initialState = {
   heroes: [],
@@ -42,13 +41,11 @@ export const heroesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getHeroes.pending, (state) => {
-        // state.status = false;
         console.log(state.heroes);
         console.log('pending');
       })
       .addCase(getHeroes.fulfilled, (state, action) => {
         state.heroes = action.payload;
-        // state.status = true;
         console.log(state.heroes);
         console.log('fulfilled');
       });

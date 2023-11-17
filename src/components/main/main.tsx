@@ -13,8 +13,6 @@ import { setPage } from '../../features/pagination/pagination-slice';
 import { useDispatch } from 'react-redux';
 import { setHeroes, getHeroes } from '../../features/heroes/heroes-slice';
 
-// const HERO_LIMIT = 10;
-
 export default function Main() {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
@@ -23,7 +21,6 @@ export default function Main() {
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage
   );
-  // const [limit, setLimit] = useState(HERO_LIMIT);
   const [data, setData] = useState({
     next: null,
     previous: null,
@@ -67,10 +64,6 @@ export default function Main() {
     },
     [searchValue, currentPage, limit, dispatch, navigate]
   );
-
-  // const handleLimitChange = (newLimit: number) => {
-  //   setLimit(newLimit);
-  // };
 
   return (
     <div data-testid="main" className="main p-0 pb-0 container">
