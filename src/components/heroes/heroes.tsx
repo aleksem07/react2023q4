@@ -17,6 +17,11 @@ function Heroes({
   searchValue: string;
   page: number;
   limit: number;
+  data?: {
+    results: Person[];
+  };
+  isLoading?: boolean;
+  isError?: boolean;
 }) {
   const { setPerson } = useHeroList();
 
