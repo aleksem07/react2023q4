@@ -9,10 +9,11 @@ type Person = {
   name: string;
 };
 
-function Heroes({ page }: { page: number }) {
+function Heroes({ searchValue, page }: { searchValue: string; page: number }) {
   const { setPerson } = useHeroList();
 
   const { data, isLoading, isError } = heroesApi.useGetHeroesQuery({
+    searchValue: searchValue,
     page: page,
   });
 

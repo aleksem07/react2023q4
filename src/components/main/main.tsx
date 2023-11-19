@@ -1,5 +1,5 @@
 import './main.scss';
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import Pagination from '../pagination/pagination';
 import { InputLimit } from '../input-limit/input-limit';
@@ -7,8 +7,10 @@ import { useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
 import { setPage } from '../../features/pagination/pagination-slice';
 import { useDispatch } from 'react-redux';
-import { setHeroes, getHeroes } from '../../features/heroes/heroes-slice';
+import { setHeroes } from '../../features/heroes/heroes-slice';
 import Heroes from '../heroes/heroes';
+import heroesApi from '../../api/api';
+import { Loader } from '../loader/loader';
 
 export default function Main() {
   const navigate = useNavigate();
@@ -16,44 +18,38 @@ export default function Main() {
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage
   );
-  const [data, setData] = useState({
-    next: null,
-    previous: null,
-    results: [],
-  });
   const searchValue = useSelector(
     (state: RootState) => state.search.searchValue
   );
-  const searchLS = useSelector((state: RootState) => state.search.searchLS);
   const heroList = useSelector((state: RootState) => state.heroes.heroes);
   const limit = useSelector((state: RootState) => state.limit.limit);
+  const { data, isLoading } = heroesApi.useGetHeroesQuery({
+    searchValue,
+    page: currentPage,
+  });
 
   useEffect(() => {
+    if (data) {
+      dispatch(setHeroes(data.results.slice(0, limit)));
+      navigate(`/?page=${currentPage}`);
+      dispatch(setPage(currentPage));
+    }
     handlePageChange(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchLS, currentPage, limit]);
+  }, [data, currentPage, limit, dispatch, navigate]);
 
   const handlePageChange = useCallback(
     async (page: number) => {
       dispatch(setPage(page));
       navigate(`/?page=${currentPage}`);
 
-      try {
-        const heroes = await dispatch(
-          getHeroes({ searchValue, page })
-        ).unwrap();
-        setData(heroes);
-
-        if (heroes) {
-          dispatch(setHeroes(heroes.results.slice(0, limit)));
-          navigate(`/?page=${page}`);
-          dispatch(setPage(page));
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      if (data) {
+        dispatch(setHeroes(data.results.slice(0, limit)));
       }
+
+      dispatch(setPage(page));
     },
-    [searchValue, currentPage, limit, dispatch, navigate]
+    [data, currentPage, limit, dispatch, navigate]
   );
 
   return (
@@ -70,7 +66,11 @@ export default function Main() {
           )}
           <InputLimit />
         </div>
-        <Heroes page={currentPage} />;
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Heroes searchValue={searchValue} page={currentPage} />
+        )}
       </div>
       <Outlet />
     </div>

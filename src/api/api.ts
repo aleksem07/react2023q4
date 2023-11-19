@@ -5,7 +5,11 @@ const heroesApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api/people' }),
   endpoints: (builder) => ({
     getHeroes: builder.query({
-      query: ({ page }) => `?page=${page}`,
+      query: ({ searchValue, page }) => {
+        return `https://swapi.dev/api/people${
+          searchValue ? `/?search=${searchValue}` : `?page=${page}`
+        }`;
+      },
     }),
   }),
 });
