@@ -3,6 +3,7 @@ import searchSlice from '../features/search/search-slice';
 import paginationSlice from '../features/pagination/pagination-slice';
 import heroesSlice from '../features/heroes/heroes-slice';
 import limitSlice from '../features/limit/limit-slice';
+import heroesApi from '../api/api';
 
 export const store = configureStore({
   reducer: {
@@ -10,7 +11,10 @@ export const store = configureStore({
     pagination: paginationSlice,
     heroes: heroesSlice,
     limit: limitSlice,
+    heroesApi: heroesApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(heroesApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
