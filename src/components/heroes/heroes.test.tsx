@@ -3,6 +3,7 @@ import Heroes from './heroes';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 
 describe('Heroes', () => {
   test('renders loader when isLoading is true', () => {
@@ -37,6 +38,10 @@ describe('Heroes', () => {
       expect(screen.getByText(heroes[1].name)).toBe('Hero 2');
       expect(screen.getByText(heroes[2].name)).toBeInTheDocument();
       expect(screen.getByText(heroes[2].name)).toBe('Hero 3');
+
+      userEvent.click(screen.getByText('Hero 1'));
+
+      expect(window.location.pathname).toBe('/hero/Hero 1');
     });
   });
 
