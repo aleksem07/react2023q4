@@ -23,7 +23,7 @@ function HeroCard() {
     };
 
     fetchHeroes();
-  }, [person.name]);
+  }, [person]);
 
   return !hero ? (
     <div

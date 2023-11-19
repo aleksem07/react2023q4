@@ -27,6 +27,7 @@ export default function Main() {
     searchValue,
     page: currentPage,
   });
+  const searchLS = useSelector((state: RootState) => state.search.searchLS);
 
   useEffect(() => {
     if (data) {
@@ -36,7 +37,7 @@ export default function Main() {
     }
     handlePageChange(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, currentPage, limit, dispatch, navigate]);
+  }, [data, searchLS, currentPage, limit]);
 
   const handlePageChange = useCallback(
     async (page: number) => {
