@@ -3,6 +3,8 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 jest.mock('../../services/heroes/heroes', () => ({
   __esModule: true,
@@ -27,15 +29,17 @@ describe('HeroCard', () => {
     });
 
     render(
-      <MemoryRouter>
-        <HeroCard />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <HeroCard />
+        </MemoryRouter>
+      </Provider>
     );
 
     const heroCardNullElement = screen.getByTestId('hero-card--null');
     expect(heroCardNullElement).toBeInTheDocument();
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(screen.queryByTestId('hero-card--null')).not.toBeInTheDocument();
       const heroCardElement = screen.getByTestId('hero-card');
       expect(heroCardElement).toBeInTheDocument();
@@ -56,9 +60,11 @@ describe('HeroCard', () => {
     });
 
     render(
-      <MemoryRouter>
-        <HeroCard />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <HeroCard />
+        </MemoryRouter>
+      </Provider>
     );
 
     const closeButtonElement = screen.getByTestId('close');
@@ -79,12 +85,14 @@ describe('HeroCard', () => {
     mockFetch.mockRejectedValue(new Error('Mocked fetch error'));
 
     render(
-      <MemoryRouter>
-        <HeroCard />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <HeroCard />
+        </MemoryRouter>
+      </Provider>
     );
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(mockedConsoleError).toHaveBeenCalledWith(
         'Error fetching data:',
         expect.any(Error)

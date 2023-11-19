@@ -10,7 +10,6 @@ import { RootState } from '../../store/store';
 function HeroCard() {
   const [hero, setHero] = useState<Hero | null>(null);
   const person = useSelector((state: RootState) => state.heroes.currentHero);
-  console.log(person);
 
   useEffect(() => {
     setHero(null);
