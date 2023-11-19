@@ -3,6 +3,7 @@ import { PaginationProps } from './pagination.types';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPage } from '../../features/pagination/pagination-slice';
 import { RootState } from '../../store/store';
+import { debounce } from 'lodash';
 
 function Pagination({ fetchData }: PaginationProps) {
   const maxPages = fetchData.count ? Math.ceil(fetchData.count / 10) : 1;
@@ -10,6 +11,15 @@ function Pagination({ fetchData }: PaginationProps) {
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage
   );
+
+  const dispatchPageChange = debounce(
+    (newPage: number) => dispatch(setPage(newPage)),
+    200
+  );
+
+  const handlePageChange = (newPage: number) => {
+    dispatchPageChange(newPage);
+  };
 
   return (
     <>
@@ -19,7 +29,7 @@ function Pagination({ fetchData }: PaginationProps) {
             <>
               <li className="page-item bg-light">
                 <button
-                  onClick={() => dispatch(setPage(currentPage - 1))}
+                  onClick={() => handlePageChange(currentPage - 1)}
                   className="page-link text-dark"
                 >
                   Prev
@@ -50,7 +60,7 @@ function Pagination({ fetchData }: PaginationProps) {
               </li>
               <li className="page-item">
                 <button
-                  onClick={() => dispatch(setPage(currentPage + 1))}
+                  onClick={() => handlePageChange(currentPage + 1)}
                   className="page-link text-dark"
                 >
                   Next
