@@ -2,8 +2,9 @@ import { Loader } from '../loader/loader';
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import HeroItem from '../hero-item/hero-item';
-import { useHeroList } from '../../util/contextAPI/hero-list';
 import heroesApi from '../../api/api';
+import { useDispatch } from 'react-redux';
+import { setCurrentHero } from '../../features/heroes/heroes-slice';
 
 type Person = {
   name: string;
@@ -23,7 +24,7 @@ function Heroes({
   isLoading?: boolean;
   isError?: boolean;
 }) {
-  const { setPerson } = useHeroList();
+  const dispatch = useDispatch();
 
   const { data, isLoading, isError } = heroesApi.useGetHeroesQuery({
     searchValue: searchValue,
@@ -42,7 +43,7 @@ function Heroes({
         {data.results.length > 0 ? (
           data.results.slice(0, limit).map((person: Person, index: number) => (
             <li
-              onClick={() => setPerson(person)}
+              onClick={() => dispatch(setCurrentHero(person))}
               key={person['name'] + index}
               className="list-group w-25"
             >

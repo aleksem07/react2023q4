@@ -4,6 +4,7 @@ import getHeroesAll from '../../services/heroes/heroes';
 const initialState = {
   heroes: [],
   status: false,
+  currentHero: null,
 };
 
 type getHeroesAllProps = {
@@ -37,6 +38,9 @@ export const heroesSlice = createSlice({
     setStatus: (state, action) => {
       state.status = action.payload;
     },
+    setCurrentHero: (state, action) => {
+      state.currentHero = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -52,6 +56,6 @@ export const heroesSlice = createSlice({
   },
 });
 
-export const { setHeroes, setStatus } = heroesSlice.actions;
+export const { setHeroes, setStatus, setCurrentHero } = heroesSlice.actions;
 
 export default heroesSlice.reducer;
