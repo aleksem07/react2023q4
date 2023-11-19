@@ -70,7 +70,7 @@ export default function Main() {
         {isLoading ? (
           <Loader />
         ) : (
-          <Heroes searchValue={searchValue} page={currentPage} />
+          <Heroes searchValue={searchValue} page={currentPage} limit={limit} />
         )}
       </div>
       <Outlet />

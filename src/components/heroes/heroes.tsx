@@ -9,7 +9,15 @@ type Person = {
   name: string;
 };
 
-function Heroes({ searchValue, page }: { searchValue: string; page: number }) {
+function Heroes({
+  searchValue,
+  page,
+  limit,
+}: {
+  searchValue: string;
+  page: number;
+  limit: number;
+}) {
   const { setPerson } = useHeroList();
 
   const { data, isLoading, isError } = heroesApi.useGetHeroesQuery({
@@ -27,7 +35,7 @@ function Heroes({ searchValue, page }: { searchValue: string; page: number }) {
     <>
       <ul className="container d-flex justify-content-center flex-wrap mb-3 gap-3">
         {data.results.length > 0 ? (
-          data.results.map((person: Person, index: number) => (
+          data.results.slice(0, limit).map((person: Person, index: number) => (
             <li
               onClick={() => setPerson(person)}
               key={person['name'] + index}
