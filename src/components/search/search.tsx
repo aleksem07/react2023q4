@@ -1,7 +1,6 @@
-'use client';
+
 import styles from '@/styles/search.module.scss';
-// 'use strict';
-import React from 'react';
+
 // import { useDispatch, useSelector } from 'react-redux';
 // import {
 //   setSearchValue,
@@ -9,7 +8,7 @@ import React from 'react';
 // } from '../../features/search/search-slice';
 // import { RootState } from '../../store/store';
 
-function Search() {
+export default function Search() {
   let searchValue = '';
   // const dispatch = useDispatch();
   // const searchValue = useSelector(
@@ -45,5 +44,3 @@ function Search() {
     </>
   );
 }
-
-export default Search;
