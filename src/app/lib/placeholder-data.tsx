@@ -1,4 +1,6 @@
-const heroPlaceholder = [{
+import { Hero } from "./definitions";
+
+const heroPlaceholder: Hero[] = [{
   id: 1,
   name: "Hero Placeholder 1",
   description: "Hero Placeholder 1",
