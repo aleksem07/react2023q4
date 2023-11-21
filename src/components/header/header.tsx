@@ -1,5 +1,5 @@
 import Search from '@/components/search/search';
-import styles from '@/app/ui/header.module.scss';
+import styles from '@/styles/header.module.scss';
 
 export default function Header() {
   return (

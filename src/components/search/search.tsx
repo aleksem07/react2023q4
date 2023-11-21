@@ -1,5 +1,5 @@
 'use client';
-import styles from '@/app/ui/search.module.scss';
+import styles from '@/styles/search.module.scss';
 // 'use strict';
 import React from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
