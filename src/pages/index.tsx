@@ -4,14 +4,20 @@ import Header from '@/components/header/header'
 import getHeroesAll from '@/api/heroes';
 import HeroItem from '@/components/hero-item/hero-item';
 import { InputLimit } from '@/components/input-limit/input-limit';
+import { GetServerSidePropsContext } from 'next';
 
 type Heroes = {
   name: string
 }
 
-export async function getStaticProps() {
-  const data = await getHeroesAll('');
-  const heroes = data.results;
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const heroes : Heroes[] = [];
+
+    for (let i = 1; i <= 3; i++) {
+      const data = await getHeroesAll('', i);
+      heroes.push(...data.results);
+    }
+
   return {
     props: {
       heroes
@@ -28,7 +34,7 @@ export default function Home( { heroes }: { heroes: Heroes[] }) {
         <ul className={styles.grid}> 
           {heroes.map((hero) => {
             return (
-              <Link href={`/page//${hero.name}`} key={hero.name} className={styles.hero__item}>
+              <Link href={`/page/${hero.name}`} key={hero.name} className={styles.hero__item}>
                 <HeroItem person={hero} />
               </Link>
             )
