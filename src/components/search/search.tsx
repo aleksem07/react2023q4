@@ -1,4 +1,3 @@
-
 import styles from '@/styles/search.module.scss';
 
 // import { useDispatch, useSelector } from 'react-redux';
@@ -29,7 +28,8 @@ export default function Search() {
         placeholder="Please enter a data..."
         aria-label="Search"
         aria-describedby="basic-addon2"
-        onChange={(e) => { searchValue = e.target.value;
+        onChange={(e) => {
+          searchValue = e.target.value;
         }}
       />
       <div className="input-group-append">

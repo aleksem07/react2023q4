@@ -20,10 +20,7 @@ export default function HeroItem({ person }: initialStateProps) {
         className={styles.image}
       />
       <div className="d-grid">
-        <h3
-          data-testid="hero-item"
-          className={styles.h3}
-        >
+        <h3 data-testid="hero-item" className={styles.h3}>
           {person && person.name}
         </h3>
       </div>
