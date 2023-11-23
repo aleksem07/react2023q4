@@ -5,6 +5,7 @@ import getHeroesAll from '@/api/heroes';
 import HeroItem from '@/components/hero-item/hero-item';
 import { InputLimit } from '@/components/input-limit/input-limit';
 import { GetServerSidePropsContext } from 'next';
+import Pagination from '@/components/pagination/pagination';
 
 type Heroes = {
   name: string;
@@ -13,7 +14,7 @@ type Heroes = {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { limit, search } = context.query;
   const heroes: Heroes[] = [];
-  
+
   if (search) {
     heroes.length = 0;
     const data = await getHeroesAll(search.toString());
@@ -49,6 +50,7 @@ export default function Home({
       <Header />
       <main className={styles.main} data-testid="main">
         <InputLimit limit={limit} />
+        <Pagination />
         <ul className={styles.grid}>
           {heroes.map((hero) => {
             return (
