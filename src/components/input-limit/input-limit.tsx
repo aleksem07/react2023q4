@@ -1,8 +1,9 @@
-import Link from 'next/link';
-
-
-export const InputLimit = ( { limit }: { limit: string }) => {
+export const InputLimit = ({ limit }: { limit: string }) => {
   const handleChangeSelect = (e: number) => {
+    if (!e || e <= 0) {
+      window.location.href = '/';
+      return;
+    }
     if (e && e !== Number(limit)) {
       const currentUrl = window.location.href;
       const url = new URL(currentUrl);

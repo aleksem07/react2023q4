@@ -4,6 +4,7 @@
   border: none;
   outline: none;
   padding: 0 10px;
+  font-size: 1rem;
 }
 
 .search__button {
@@ -14,6 +15,9 @@
   outline: none;
   background: none;
   cursor: pointer;
+  color: #0071ff;
+  font-size: 1rem;
+  font-style: bold;
 
   &:hover {
     color: #0071ff;

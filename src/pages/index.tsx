@@ -10,15 +10,21 @@ type Heroes = {
   name: string;
 };
 
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { limit, search } = context.query;
   const heroes: Heroes[] = [];
-
-  for (let i = 1; i <= 3; i++) {
-    const data = await getHeroesAll('', i);
+  
+  if (search) {
+    heroes.length = 0;
+    const data = await getHeroesAll(search.toString());
     heroes.push(...data.results);
+  } else {
+    for (let i = 1; i <= 3; i++) {
+      const data = await getHeroesAll('', i);
+      heroes.push(...data.results);
+    }
   }
 
-  const { limit } = ctx.query;
   if (limit) {
     heroes.length = Number(limit);
   }
@@ -31,7 +37,13 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   };
 }
 
-export default function Home({ heroes, limit }: { heroes: Heroes[], limit: string }) {
+export default function Home({
+  heroes,
+  limit,
+}: {
+  heroes: Heroes[];
+  limit: string;
+}) {
   return (
     <>
       <Header />
