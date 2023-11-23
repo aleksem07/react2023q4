@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 describe('Home', () => {
   it('renders a heading', () => {
-    render(<Home heroes={[]} />);
+    render(<Home heroes={[]} limit="3" />);
 
     const heading = screen.getByTestId('main');
 

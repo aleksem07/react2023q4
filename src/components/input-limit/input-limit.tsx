@@ -1,31 +1,31 @@
-'use client';
-// import { setLimit } from '../../features/limit/limit-slice';
-// import { useDispatch } from 'react-redux';
+import Link from 'next/link';
 
-export const InputLimit = () => {
-  // const dispatch = useDispatch();
+
+export const InputLimit = ( { limit }: { limit: string }) => {
+  const handleChangeSelect = (e: number) => {
+    if (e && e !== Number(limit)) {
+      const currentUrl = window.location.href;
+      const url = new URL(currentUrl);
+      url.searchParams.set('limit', e.toString());
+      window.location.href = url.toString();
+    }
+  };
 
   return (
     <>
       <select
         data-testid="input-limit"
-        // onChange={(e) => dispatch(setLimit(Number(e.target.value)))}
-        onChange={(e) => console.log(Number(e.target.value))}
+        onChange={(e) => handleChangeSelect(Number(e.target.value))}
         className="m-0 p-0 border-0 rounded-2"
         name="limit"
         id="limit"
         style={{ cursor: 'pointer' }}
       >
+        <option value={limit}>current limit: {limit}</option>
+        <option value="25">25</option>
+        <option value="20">20</option>
+        <option value="15">15</option>
         <option value="10">10</option>
-        <option defaultValue="9">9</option>
-        <option value="8">8</option>
-        <option value="7">7</option>
-        <option value="6">6</option>
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
       </select>
     </>
   );

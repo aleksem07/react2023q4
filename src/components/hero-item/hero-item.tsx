@@ -13,6 +13,7 @@ export default function HeroItem({ person }: initialStateProps) {
   return (
     <>
       <Image
+        priority={true}
         src="/placeholder.webp"
         alt="placeholder"
         width={100}

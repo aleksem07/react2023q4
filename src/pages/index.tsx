@@ -13,7 +13,7 @@ type Heroes = {
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const heroes: Heroes[] = [];
 
-  for (let i = 1; i <= 9; i++) {
+  for (let i = 1; i <= 3; i++) {
     const data = await getHeroesAll('', i);
     heroes.push(...data.results);
   }
@@ -26,16 +26,17 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   return {
     props: {
       heroes,
+      limit: limit || heroes.length.toString(),
     },
   };
 }
 
-export default function Home({ heroes }: { heroes: Heroes[] }) {
+export default function Home({ heroes, limit }: { heroes: Heroes[], limit: string }) {
   return (
     <>
       <Header />
       <main className={styles.main} data-testid="main">
-        <InputLimit />
+        <InputLimit limit={limit} />
         <ul className={styles.grid}>
           {heroes.map((hero) => {
             return (
@@ -49,12 +50,6 @@ export default function Home({ heroes }: { heroes: Heroes[] }) {
             );
           })}
         </ul>
-        <Link href="/page">
-          <h1 className={styles.title}>hero</h1>
-        </Link>
-        <Link href="/page/123">
-          <h1 className={styles.title}>id</h1>
-        </Link>
       </main>
     </>
   );
