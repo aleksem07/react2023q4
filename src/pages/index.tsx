@@ -6,10 +6,7 @@ import HeroItem from '@/components/hero-item/hero-item';
 import { InputLimit } from '@/components/input-limit/input-limit';
 import { GetServerSidePropsContext } from 'next';
 import Pagination from '@/components/pagination/pagination';
-
-type Heroes = {
-  name: string;
-};
+import { HomeProps, Heroes } from '@/pages/index.types';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { limit, search } = context.query;
@@ -44,13 +41,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-export default function Home({
-  heroes,
-  limit,
-}: {
-  heroes: Heroes[];
-  limit: string;
-}) {
+export default function Home({ heroes, limit }: HomeProps) {
   return (
     <>
       <Header />
