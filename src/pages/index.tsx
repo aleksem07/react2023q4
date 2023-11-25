@@ -18,11 +18,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (search) {
     heroes.length = 0;
     const data = await getHeroesAll(search.toString());
-    heroes.push(...data.results);
+
+    if (data && data.results) {
+      heroes.push(...data.results);
+    }
   } else {
     for (let i = 1; i <= 3; i++) {
       const data = await getHeroesAll('', i);
-      heroes.push(...data.results);
+
+      if (data && data.results) {
+        heroes.push(...data.results);
+      }
     }
   }
 
