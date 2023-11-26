@@ -13,3 +13,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+ul {
+  list-style-type: none;
+}

@@ -2,6 +2,7 @@ import { InputLimit } from '@/components/input-limit/input-limit';
 import Link from 'next/link';
 import clsx from 'clsx';
 import styles from '@/styles/link.module.scss';
+import stylesHeroCard from '@/styles/hero-card.module.scss';
 import { usePathname } from 'next/navigation';
 import getHeroesAll from '@/api/heroes';
 import { GetServerSidePropsContext } from 'next';
@@ -9,6 +10,7 @@ import Pagination from '@/components/pagination/pagination';
 import Header from '@/components/header/header';
 import HeroItem from '@/components/hero-item/hero-item';
 import { HomeProps, Heroes } from '@/pages/index.types';
+import HeroCard from '@/components/hero-card/hero-card';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { limit, search } = context.query;
@@ -47,7 +49,7 @@ export default function Home({ heroes, limit }: HomeProps) {
   return (
     <>
       <Header />
-      <main className={styles.main} data-testid="main">
+      <main className={stylesHeroCard.hero__card_main} data-testid="main">
         <InputLimit limit={limit} />
         <Pagination />
         <Link
@@ -57,21 +59,20 @@ export default function Home({ heroes, limit }: HomeProps) {
             [styles['link-active']]: usePathname() === '/page',
           })}
         >
-          back to main
+          CLOSE
         </Link>
-        <ul className={styles.grid}>
+        <ul>
           {heroes.map((hero) => {
             return (
-              <Link
-                href={`/page/${hero.name}`}
-                key={hero.name}
-                className={styles.hero__item}
-              >
-                <HeroItem person={hero} />
-              </Link>
+              <li key={hero.name}>
+                <Link href={`/page/${hero.name}`} className={styles.hero__item}>
+                  <HeroItem person={hero} />
+                </Link>
+              </li>
             );
           })}
         </ul>
+        <HeroCard person={heroes[0]} />
       </main>
     </>
   );
