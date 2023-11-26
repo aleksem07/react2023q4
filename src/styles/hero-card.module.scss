@@ -1,6 +1,6 @@
 .hero__card_main {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     'limit limit back'
     'pagination pagination back'
     'heroes heroes info';
@@ -11,13 +11,18 @@
 
   & nav {
     grid-area: pagination;
+
+    & ul {
+      display: flex;
+      gap: 10px;
+    }
   }
 
   & ul {
     grid-area: heroes;
   }
 
-  & a{
+  & a {
     grid-area: back;
   }
 
