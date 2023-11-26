@@ -1,0 +1,25 @@
+.search__input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  font-size: 1rem;
+}
+
+.search__button {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #0071ff;
+  font-size: 1rem;
+  font-style: bold;
+
+  &:hover {
+    color: #0071ff;
+  }
+}

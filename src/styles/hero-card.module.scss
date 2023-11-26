@@ -1,0 +1,32 @@
+.hero__card_main {
+  display: grid;
+  grid-template-areas:
+    'limit limit back'
+    'pagination pagination back'
+    'heroes heroes info';
+
+  & select {
+    grid-area: limit;
+  }
+
+  & nav {
+    grid-area: pagination;
+
+    & ul {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  & ul {
+    grid-area: heroes;
+  }
+
+  & a {
+    grid-area: back;
+  }
+
+  & .hero__details {
+    grid-area: info;
+  }
+}
