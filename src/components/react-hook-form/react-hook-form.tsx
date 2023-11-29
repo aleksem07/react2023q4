@@ -1,12 +1,13 @@
 import { AppRoute } from '../../const';
+import { Link } from 'react-router-dom';
 
-export default function ReactHookForm () {
+export default function ReactHookForm() {
   return (
-  <>
-  <p>ReactHookForm</p>
-        <a href={AppRoute.Root}>
+    <>
+      <p>ReactHookForm</p>
+      <Link to={AppRoute.Root}>
         <p>Back to main</p>
-      </a>
-  </>
-  ) 
+      </Link>
+    </>
+  );
 }

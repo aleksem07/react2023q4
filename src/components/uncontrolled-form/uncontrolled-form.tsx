@@ -1,4 +1,5 @@
 import { AppRoute } from '../../const';
+import { Link } from 'react-router-dom';
 
 export default function UncontrolledForm() {
   return (
@@ -9,19 +10,19 @@ export default function UncontrolledForm() {
           <input type="text" name="name" />
         </label>
         <label>
-          Email:
-          <input type="email" name="email" />
+          Age:
+          <input type="number" name="Age" />
         </label>
         <label>
-          Password:
-          <input type="password" name="password" />
+          Email:
+          <input type="email" name="email" />
         </label>
         <button type="submit">Submit</button>
       </form>
 
-      <a href={AppRoute.Root}>
+      <Link to={AppRoute.Root}>
         <p>Back to main</p>
-      </a>
+      </Link>
     </>
   );
 }
