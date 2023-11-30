@@ -29,63 +29,74 @@ export default function ReactHookForm() {
 
   return (
     <>
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        Name:
-        <input {...register('name', { required: true })} placeholder="Izyum" />
-        {errors.name && <span>Field name is required</span>}
-      </label>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <label>
+          Name:
+          <input
+            {...register('name', { required: true })}
+            placeholder="Izyum"
+          />
+          {errors.name && <span>Field name is required</span>}
+        </label>
 
-      <input type='number' {...register('age', { min: { value: 18, message: 'Minimum age should be 18'}, max: {
-        value: 100,
-        message: 'Maximum age should be 100',
-      }})} />
-      {errors.age && <span>{errors.age.message}</span>}
-      <input
-        {...register('email', { required: true })}
-        placeholder="email@mail.com"
-      />
-      {errors.email && <span>Field email is required</span>}
-      <input
-        {...register('password', {
-          required: 'Field password is required',
-          minLength: {
-            value: 6,
-            message: 'Minimum length should be 6',
-          },
-        })}
-        placeholder="Password1!"
-      />
-      {errors.password && <span>{errors.password.message}</span>}
-      <input
-        {...register('confirmPassword', {
-          required: 'Field confirm password is required',
-          minLength: {
-            value: 6,
-            message: 'Minimum length should be 6',
-          },
-        })}
-        placeholder="Password1!"
-      />
-      {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
-      <select {...register('gender')}>
-        <option defaultValue="male">Male</option>
-        <option value="female">Female</option>
-      </select>
-      {errors.gender && <span>Field gender is required</span>}
-      <input {...register('acceptTC', { required: true })} />
-      {errors.acceptTC && <span>Field acceptTC is required</span>}
-      <input {...register('pic', { required: true })} />
-      {errors.pic && <span>Field pic is required</span>}
-      <input {...register('country', { required: true })} placeholder="Ru" />
-      {errors.country && <span>Field country is required</span>}
+        <input
+          type="number"
+          {...register('age', {
+            min: { value: 18, message: 'Minimum age should be 18' },
+            max: {
+              value: 100,
+              message: 'Maximum age should be 100',
+            },
+          })}
+        />
+        {errors.age && <span>{errors.age.message}</span>}
+        <input
+          {...register('email', { required: true })}
+          placeholder="email@mail.com"
+        />
+        {errors.email && <span>Field email is required</span>}
+        <input
+          {...register('password', {
+            required: 'Field password is required',
+            minLength: {
+              value: 6,
+              message: 'Minimum length should be 6',
+            },
+          })}
+          placeholder="Password1!"
+        />
+        {errors.password && <span>{errors.password.message}</span>}
+        <input
+          {...register('confirmPassword', {
+            required: 'Field confirm password is required',
+            minLength: {
+              value: 6,
+              message: 'Minimum length should be 6',
+            },
+          })}
+          placeholder="Password1!"
+        />
+        {errors.confirmPassword && (
+          <span>{errors.confirmPassword.message}</span>
+        )}
+        <select {...register('gender')}>
+          <option defaultValue="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        {errors.gender && <span>Field gender is required</span>}
+        <input {...register('acceptTC', { required: true })} />
+        {errors.acceptTC && <span>Field acceptTC is required</span>}
+        <input {...register('pic', { required: true })} />
+        {errors.pic && <span>Field pic is required</span>}
+        <input {...register('country', { required: true })} placeholder="Ru" />
+        {errors.country && <span>Field country is required</span>}
 
-      <button type="submit">Submit</button>
-    </form>
+        <button type="submit">Submit</button>
+      </form>
 
-    <Link to={AppRoute.Root}>
-      <p>Back to main</p>
-    </Link>
+      <Link to={AppRoute.Root}>
+        <p>Back to main</p>
+      </Link>
     </>
   );
 }
