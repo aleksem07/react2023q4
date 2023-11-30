@@ -10,7 +10,7 @@ type initialStateType = {
   acceptTC: boolean;
   pic: string;
   country: string;
-}
+};
 
 const initialState: initialStateType = {
   name: '',
@@ -30,9 +30,9 @@ export const uncontrolledFormSlice = createSlice({
   reducers: {
     setName: (state, action) => {
       state.name = action.payload;
-    }
+    },
   },
-})
+});
 
 export const { setName } = uncontrolledFormSlice.actions;
 

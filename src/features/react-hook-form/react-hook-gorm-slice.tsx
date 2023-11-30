@@ -15,7 +15,7 @@ export const controlledFormSlice = createSlice({
   reducers: {
     setName: (state, action) => {
       state.name = action.payload;
-    }
+    },
   },
 });
 

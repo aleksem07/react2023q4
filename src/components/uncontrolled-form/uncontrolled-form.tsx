@@ -5,8 +5,8 @@ import styles from '../../styles/uncontrolled-form.module.scss';
 export default function UncontrolledForm() {
   return (
     <>
-    {/* action="https://httpbin.org/post" */}
-      <form className={styles.form} method="get" encType='multipart/form-data'>
+      {/* action="https://httpbin.org/post" */}
+      <form className={styles.form} method="get" encType="multipart/form-data">
         <label>
           Name:
           <input type="text" name="name" />
@@ -40,7 +40,7 @@ export default function UncontrolledForm() {
           <input type="checkbox" name="acceptTC" />
         </label>
         <label>
-          <input type="file" name="pic" accept='image/*' />
+          <input type="file" name="pic" accept="image/*" />
         </label>
 
         <label>
