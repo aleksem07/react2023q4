@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Main() {
   return (
     <>
+      <h1>Main</h1>
       <h2>should have links to other 2 routes</h2>
       <h3>Route for the form created using uncontrolled components approach</h3>
       <Link to={AppRoute.Uncontrolled}>
