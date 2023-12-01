@@ -1,18 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type initialStateType = {
-  name: string;
-  age: number;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  gender: string;
-  acceptTC: boolean;
-  pic: string;
-  country: string;
-};
-
-const initialState: initialStateType = {
+const initialState = {
   name: '',
   age: 0,
   email: '',
@@ -28,12 +16,20 @@ export const uncontrolledFormSlice = createSlice({
   name: 'uncontrolledForm',
   initialState,
   reducers: {
-    setName: (state, action) => {
-      state.name = action.payload;
+    setFormUncontrolledData: (state, action) => {
+      state.name = action.payload.name;
+      state.age = action.payload.age;
+      state.email = action.payload.email;
+      state.password = action.payload.password;
+      state.confirmPassword = action.payload.confirmPassword;
+      state.gender = action.payload.gender;
+      state.acceptTC = action.payload.acceptTC;
+      state.pic = action.payload.pic;
+      state.country = action.payload.country;
     },
   },
 });
 
-export const { setName } = uncontrolledFormSlice.actions;
+export const { setFormUncontrolledData } = uncontrolledFormSlice.actions;
 
 export default uncontrolledFormSlice.reducer;
