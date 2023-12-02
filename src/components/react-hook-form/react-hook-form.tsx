@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useDispatch } from 'react-redux';
 import { setFormControlledData } from '../../features/react-hook-form/react-hook-gorm-slice';
+import { userSchema, ageSchema, emailSchema, passwordSchema, confirmPasswordSchema, acceptTCSchema, genderSchema } from '../../utils/validator/validator';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 type Inputs = {
   name: string;
@@ -18,18 +21,31 @@ type Inputs = {
 };
 
 export default function ReactHookForm() {
+  
   const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
-    // watch,
+    watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    resolver: yupResolver(
+      yup.object().shape({
+        name: userSchema.fields.name,
+        age: ageSchema.fields.age,
+        email: emailSchema.fields.email,
+        password: passwordSchema.fields.password,
+        confirmPassword: confirmPasswordSchema.fields.confirmPassword,
+        gender: genderSchema.fields.gender,
+        acceptTC: acceptTCSchema.fields.acceptTC,
+      })
+    ),
+  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) =>
     dispatch(setFormControlledData(data));
 
-  // console.log(watch('name'));
+  console.log(watch('name'));
 
   return (
     <>

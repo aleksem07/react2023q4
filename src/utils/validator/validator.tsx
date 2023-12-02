@@ -54,3 +54,9 @@ export const acceptTCSchema = yup.object({
     .boolean()
     .oneOf([true], 'Please accept the terms and conditions'),
 });
+
+export const genderSchema = yup.object({
+  gender: yup
+    .string()
+    .oneOf(['male', 'female'], 'Please choose your gender'),
+});
