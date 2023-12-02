@@ -1,15 +1,25 @@
 .form {
+  width: 800px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   justify-items: start;
-  align-items: center;
-  grid-gap: 20px;
+  align-items: start;
   margin-bottom: 20px;
 
   & label {
-    display: flex;
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(3, 25px);
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    & input,
+    & select {
+      width: 600px;
+    }
+  }
+
+  & label > span {
+    color: red;
   }
 }

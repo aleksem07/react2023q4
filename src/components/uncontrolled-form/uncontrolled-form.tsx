@@ -4,6 +4,15 @@ import styles from '../../styles/uncontrolled-form.module.scss';
 import { useDispatch } from 'react-redux';
 import { setFormUncontrolledData } from '../../features/uncontrolled/uncontrolled-slice';
 import { useState } from 'react';
+import {
+  userSchema,
+  ageSchema,
+  emailSchema,
+  passwordSchema,
+  confirmPasswordSchema,
+  acceptTCSchema,
+} from '../../utils/validator/validator';
+import * as yup from 'yup';
 
 export default function UncontrolledForm() {
   const redirect = useNavigate();
@@ -19,11 +28,119 @@ export default function UncontrolledForm() {
     pic: '',
     country: '',
   });
+  const [errors, setErrors] = useState({
+    name: '',
+    age: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    acceptTC: '',
+    pic: '',
+    country: '',
+  });
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setFormUncontrolledData(formData));
-    redirect(AppRoute.Root);
+    let isValid = true;
+
+    try {
+      await userSchema.validate(formData);
+    } catch (err) {
+      isValid = false;
+      if (err instanceof yup.ValidationError) {
+        const yupError = err as yup.ValidationError;
+        setErrors({
+          name: yupError.path === 'name' ? yupError.errors[0] : '',
+          age: yupError.path === 'age' ? yupError.errors[0] : '',
+          email: yupError.path === 'email' ? yupError.errors[0] : '',
+          password: yupError.path === 'password' ? yupError.errors[0] : '',
+          confirmPassword:
+            yupError.path === 'confirmPassword' ? yupError.errors[0] : '',
+          acceptTC: yupError.path === 'acceptTC' ? yupError.errors[0] : '',
+          pic: yupError.path === 'pic' ? yupError.errors[0] : '',
+          country: yupError.path === 'country' ? yupError.errors[0] : '',
+        });
+      }
+    }
+    try {
+      await ageSchema.validate(formData);
+    } catch (err) {
+      isValid = false;
+      if (err instanceof yup.ValidationError) {
+        const yupError = err as yup.ValidationError;
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          age: yupError.path === 'age' ? yupError.errors[0] : prevErrors.age,
+        }));
+      }
+    }
+
+    try {
+      await emailSchema.validate(formData);
+    } catch (err) {
+      isValid = false;
+      if (err instanceof yup.ValidationError) {
+        const yupError = err as yup.ValidationError;
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          email:
+            yupError.path === 'email' ? yupError.errors[0] : prevErrors.email,
+        }));
+      }
+    }
+
+    try {
+      await passwordSchema.validate(formData);
+    } catch (err) {
+      isValid = false;
+      if (err instanceof yup.ValidationError) {
+        const yupError = err as yup.ValidationError;
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          password:
+            yupError.path === 'password'
+              ? yupError.errors[0]
+              : prevErrors.password,
+        }));
+      }
+    }
+
+    try {
+      await confirmPasswordSchema.validate(formData);
+    } catch (err) {
+      isValid = false;
+      if (err instanceof yup.ValidationError) {
+        const yupError = err as yup.ValidationError;
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          confirmPassword:
+            yupError.path === 'confirmPassword'
+              ? yupError.errors[0]
+              : prevErrors.confirmPassword,
+        }));
+      }
+    }
+
+    try {
+      await acceptTCSchema.validate(formData);
+    } catch (err) {
+      isValid = false;
+      if (err instanceof yup.ValidationError) {
+        const yupError = err as yup.ValidationError;
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          acceptTC:
+            yupError.path === 'acceptTC'
+              ? yupError.errors[0]
+              : prevErrors.acceptTC,
+        }));
+      }
+    }
+
+    if (isValid) {
+      dispatch(setFormUncontrolledData(formData));
+      redirect(AppRoute.Root);
+    }
   };
 
   return (
@@ -43,6 +160,7 @@ export default function UncontrolledForm() {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
+          {errors.name && <span>{errors.name}</span>}
         </label>
         <label>
           Age:
@@ -56,6 +174,7 @@ export default function UncontrolledForm() {
               setFormData({ ...formData, age: Number(e.target.value) })
             }
           />
+          {errors.age && <span>{errors.age}</span>}
         </label>
         <label>
           Email:
@@ -69,6 +188,7 @@ export default function UncontrolledForm() {
               setFormData({ ...formData, email: e.target.value })
             }
           />
+          {errors.email && <span>{errors.email}</span>}
         </label>
         <label>
           Password:
@@ -82,7 +202,9 @@ export default function UncontrolledForm() {
               setFormData({ ...formData, password: e.target.value })
             }
           />
+          {errors.password && <span>{errors.password}</span>}
         </label>
+
         <label>
           Confirm Password:
           <input
@@ -95,6 +217,7 @@ export default function UncontrolledForm() {
               setFormData({ ...formData, confirmPassword: e.target.value })
             }
           />
+          {errors.confirmPassword && <span>{errors.confirmPassword}</span>}
         </label>
 
         <label>
@@ -110,23 +233,24 @@ export default function UncontrolledForm() {
             <option value="female">Female</option>
           </select>
         </label>
+
         <label>
           accept T&C
           <input
             type="checkbox"
             name="acceptTC"
-            required
             checked={formData.acceptTC}
             onChange={(e) =>
               setFormData({ ...formData, acceptTC: e.target.checked })
             }
           />
+          {errors.acceptTC && <span>{errors.acceptTC}</span>}
         </label>
         <label>
           <input
             type="file"
             name="pic"
-            accept="image/*"
+            accept="image/png, image/jpeg, image/jpg"
             onChange={(e) => setFormData({ ...formData, pic: e.target.value })}
           />
         </label>
