@@ -2,6 +2,7 @@ import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import SubmittedUncontrolledForm from '../submitted-uncontrolled-form/submitted-uncontrolled-form';
 import styles from '../../styles/main.module.scss';
+import SubmittedReactHookForm from '../submitted-react-hooh-form/submitted-react-hooh-form';
 
 export default function Main() {
   return (
@@ -20,12 +21,12 @@ export default function Main() {
         </div>
         <div className={styles.controlled}>
           <h3>
-            Route for the similar form, but created with the help of the React
-            Hook Form
+            Route for the form, but created with the help of the React Hook Form
           </h3>
           <Link to={AppRoute.Controlled}>
             <p>Controlled</p>
           </Link>
+          <SubmittedReactHookForm />
         </div>
       </div>
     </>

@@ -2,6 +2,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from '../../styles/controlled-form.module.scss';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { useDispatch } from 'react-redux';
+import { setFormControlledData } from '../../features/react-hook-form/react-hook-gorm-slice';
 
 type Inputs = {
   name: string;
@@ -11,21 +13,23 @@ type Inputs = {
   confirmPassword: string;
   gender: string;
   acceptTC: boolean;
-  upload: string;
+  pic: string;
   country: string;
 };
 
 export default function ReactHookForm() {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) =>
+    dispatch(setFormControlledData(data));
 
-  console.log(watch('name'));
+  // console.log(watch('name'));
 
   return (
     <>
@@ -119,9 +123,9 @@ export default function ReactHookForm() {
           Upload:
           <input
             type="file"
-            {...register('upload', { required: 'Field upload is required' })}
+            {...register('pic', { required: 'Field upload is required' })}
           />
-          {errors.upload && <span>{errors.upload.message}</span>}
+          {errors.pic && <span>{errors.pic.message}</span>}
         </label>
 
         <label>
