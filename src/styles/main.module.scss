@@ -1,0 +1,17 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: start;
+  grid-gap: 20px;
+}
+
+.uncontrolled {
+  outline: 5px solid rgba(247, 9, 9, 0.589);
+  outline-offset: -5px;
+}
+
+.controlled {
+  outline: 5px solid rgba(9, 247, 9, 0.589);
+  outline-offset: -5px;
+}
