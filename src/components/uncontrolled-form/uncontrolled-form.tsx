@@ -12,9 +12,12 @@ import {
   confirmPasswordSchema,
   acceptTCSchema,
 } from '../../utils/validator/validator';
+import checkPasswordLength from '../../utils/password/password';
 import * as yup from 'yup';
 
+
 export default function UncontrolledForm() {
+  checkPasswordLength();
   const redirect = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -194,6 +197,7 @@ export default function UncontrolledForm() {
           Password:
           <input
             type="password"
+            id='password'
             name="password"
             placeholder="Password1!"
             required

@@ -24,7 +24,7 @@ export const controlledFormSlice = createSlice({
       state.confirmPassword = action.payload.confirmPassword;
       state.gender = action.payload.gender;
       state.acceptTC = action.payload.acceptTC;
-      state.pic = action.payload.pic;
+      state.pic = action.payload.pic[0].name;
       state.country = action.payload.country;
     },
   },

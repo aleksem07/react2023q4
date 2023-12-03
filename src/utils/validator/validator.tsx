@@ -56,7 +56,12 @@ export const acceptTCSchema = yup.object({
 });
 
 export const genderSchema = yup.object({
-  gender: yup
-    .string()
-    .oneOf(['male', 'female'], 'Please choose your gender'),
+  gender: yup.string().oneOf(['male', 'female'], 'Please choose your gender'),
 });
+
+export const countrySchema = yup.object({
+  country: yup
+    .string()
+    .oneOf(['Russia', 'USA', 'China'], 'Please choose your country'),
+});
+

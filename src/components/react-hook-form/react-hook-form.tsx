@@ -1,12 +1,21 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from '../../styles/controlled-form.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useDispatch } from 'react-redux';
 import { setFormControlledData } from '../../features/react-hook-form/react-hook-gorm-slice';
-import { userSchema, ageSchema, emailSchema, passwordSchema, confirmPasswordSchema, acceptTCSchema, genderSchema } from '../../utils/validator/validator';
+import {
+  userSchema,
+  ageSchema,
+  emailSchema,
+  passwordSchema,
+  confirmPasswordSchema,
+  acceptTCSchema,
+  genderSchema
+} from '../../utils/validator/validator';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import checkPasswordLength from '../../utils/password/password';
 
 type Inputs = {
   name: string;
@@ -16,12 +25,13 @@ type Inputs = {
   confirmPassword: string;
   gender: string;
   acceptTC: boolean;
-  pic: string;
-  country: string;
+  pic?: string;
+  country?: string;
 };
 
 export default function ReactHookForm() {
-  
+  checkPasswordLength();
+  const redirect = useNavigate();
   const dispatch = useDispatch();
   const {
     register,
@@ -38,13 +48,15 @@ export default function ReactHookForm() {
         confirmPassword: confirmPasswordSchema.fields.confirmPassword,
         gender: genderSchema.fields.gender,
         acceptTC: acceptTCSchema.fields.acceptTC,
+
       })
     ),
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) =>
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(setFormControlledData(data));
-
+    redirect(AppRoute.Root);
+  }
   console.log(watch('name'));
 
   return (
@@ -85,6 +97,7 @@ export default function ReactHookForm() {
         <label>
           Password:
           <input
+            id='password'
             type="password"
             {...register('password', {
               required: 'Field password is required',
@@ -119,9 +132,10 @@ export default function ReactHookForm() {
         <label>
           Gender:
           <select {...register('gender')}>
-            <option defaultValue="male">Male</option>
+            <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
+          {errors.gender && <span>{errors.gender.message}</span>}
         </label>
 
         <label>
