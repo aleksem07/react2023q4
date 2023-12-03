@@ -16,8 +16,8 @@ export default function SubmittedReactHookForm() {
       <p>Confirm Password: {controlledFormData.confirmPassword}</p>
       <p>Gender: {controlledFormData.gender}</p>
       <p>Accept TC: {controlledFormData.acceptTC.toString()}</p>
-      <p>Pic: {controlledFormData.pic.toString()}</p>
       <p>Country: {controlledFormData.country}</p>
+      <p style={{ wordBreak: 'break-all' }}>Pic: {controlledFormData.pic}</p>
     </div>
   );
 }

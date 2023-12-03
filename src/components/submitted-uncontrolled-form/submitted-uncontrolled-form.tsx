@@ -16,8 +16,8 @@ export default function SubmittedUncontrolledForm() {
       <p>Confirm Password: {uncontrolledFormData.confirmPassword}</p>
       <p>Gender: {uncontrolledFormData.gender}</p>
       <p>Accept TC: {uncontrolledFormData.acceptTC.toString()}</p>
-      <p>Pic: {uncontrolledFormData.pic}</p>
       <p>Country: {uncontrolledFormData.country}</p>
+      <p style={{ wordBreak: 'break-all' }}>Pic: {uncontrolledFormData.pic}</p>
     </div>
   );
 }

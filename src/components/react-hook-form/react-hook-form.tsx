@@ -52,6 +52,27 @@ export default function ReactHookForm() {
     ),
   });
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
+
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          dispatch(
+            setFormControlledData({ pic: event.target.result.toString() })
+          );
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(setFormControlledData(data));
     redirect(AppRoute.Root);
@@ -152,7 +173,8 @@ export default function ReactHookForm() {
           Upload:
           <input
             type="file"
-            {...register('pic', { required: 'Field upload is required' })}
+            accept="image/png, image/jpeg, image/jpg"
+            onChange={handleImageChange}
           />
           {errors.pic && <span>{errors.pic.message}</span>}
         </label>

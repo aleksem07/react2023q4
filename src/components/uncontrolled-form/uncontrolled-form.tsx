@@ -145,6 +145,25 @@ export default function UncontrolledForm() {
     }
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (!e.target.files) {
+      return;
+    }
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      if (reader.result) {
+        setFormData({ ...formData, pic: reader.result.toString() });
+      }
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <>
       <form
@@ -254,7 +273,7 @@ export default function UncontrolledForm() {
             type="file"
             name="pic"
             accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => setFormData({ ...formData, pic: e.target.value })}
+            onChange={handleImageChange}
           />
         </label>
 
