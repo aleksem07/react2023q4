@@ -15,7 +15,6 @@ import {
 import checkPasswordLength from '../../utils/password/password';
 import * as yup from 'yup';
 
-
 export default function UncontrolledForm() {
   checkPasswordLength();
   const redirect = useNavigate();
@@ -197,7 +196,7 @@ export default function UncontrolledForm() {
           Password:
           <input
             type="password"
-            id='password'
+            id="password"
             name="password"
             placeholder="Password1!"
             required

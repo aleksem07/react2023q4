@@ -7,7 +7,9 @@ export default function checkPasswordLength() {
 
   const password = passwordInput.value;
 
-  password.length < 3 ? (passwordInput.style.background = 'red') : 
-  password.length < 7 ? (passwordInput.style.background = 'yellow') :
-  (passwordInput.style.background = '');
+  password.length < 3
+    ? (passwordInput.style.background = 'red')
+    : password.length < 7
+    ? (passwordInput.style.background = 'yellow')
+    : (passwordInput.style.background = '');
 }

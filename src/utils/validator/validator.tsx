@@ -64,4 +64,3 @@ export const countrySchema = yup.object({
     .string()
     .oneOf(['Russia', 'USA', 'China'], 'Please choose your country'),
 });
-

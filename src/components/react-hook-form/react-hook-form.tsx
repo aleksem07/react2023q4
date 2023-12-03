@@ -11,7 +11,7 @@ import {
   passwordSchema,
   confirmPasswordSchema,
   acceptTCSchema,
-  genderSchema
+  genderSchema,
 } from '../../utils/validator/validator';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -48,7 +48,6 @@ export default function ReactHookForm() {
         confirmPassword: confirmPasswordSchema.fields.confirmPassword,
         gender: genderSchema.fields.gender,
         acceptTC: acceptTCSchema.fields.acceptTC,
-
       })
     ),
   });
@@ -56,7 +55,7 @@ export default function ReactHookForm() {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(setFormControlledData(data));
     redirect(AppRoute.Root);
-  }
+  };
   console.log(watch('name'));
 
   return (
@@ -97,7 +96,7 @@ export default function ReactHookForm() {
         <label>
           Password:
           <input
-            id='password'
+            id="password"
             type="password"
             {...register('password', {
               required: 'Field password is required',
