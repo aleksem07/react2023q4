@@ -14,6 +14,7 @@ import {
 } from '../../utils/validator/validator';
 import checkPasswordLength from '../../utils/password/password';
 import * as yup from 'yup';
+import { countries } from '../../data/countries';
 
 export default function UncontrolledForm() {
   checkPasswordLength();
@@ -288,7 +289,13 @@ export default function UncontrolledForm() {
             onChange={(e) =>
               setFormData({ ...formData, country: e.target.value })
             }
+            list="countries-list"
           />
+          <datalist id="countries-list">
+            {countries.map((country, index) => (
+              <option key={index} value={country} />
+            ))}
+          </datalist>
         </label>
 
         <button type="submit">Submit</button>

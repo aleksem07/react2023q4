@@ -16,6 +16,7 @@ import {
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import checkPasswordLength from '../../utils/password/password';
+import { countries } from '../../data/countries';
 
 type Inputs = {
   name: string;
@@ -184,7 +185,13 @@ export default function ReactHookForm() {
           <input
             {...register('country', { required: 'Field country is required' })}
             placeholder="Ru"
+            list="countries-list"
           />
+          <datalist id="countries-list">
+            {countries.map((country, index) => (
+              <option key={index} value={country} />
+            ))}
+          </datalist>
           {errors.country && <span>{errors.country.message}</span>}
         </label>
 
