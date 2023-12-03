@@ -12,6 +12,7 @@ import {
   confirmPasswordSchema,
   acceptTCSchema,
   genderSchema,
+  countrySchema,
 } from '../../utils/validator/validator';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -37,7 +38,6 @@ export default function ReactHookForm() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: yupResolver(
@@ -49,6 +49,7 @@ export default function ReactHookForm() {
         confirmPassword: confirmPasswordSchema.fields.confirmPassword,
         gender: genderSchema.fields.gender,
         acceptTC: acceptTCSchema.fields.acceptTC,
+        country: countrySchema.fields.country,
       })
     ),
   });
@@ -78,7 +79,6 @@ export default function ReactHookForm() {
     dispatch(setFormControlledData(data));
     redirect(AppRoute.Root);
   };
-  console.log(watch('name'));
 
   return (
     <>
@@ -175,6 +175,7 @@ export default function ReactHookForm() {
           <input
             type="file"
             accept="image/png, image/jpeg, image/jpg"
+            required
             onChange={handleImageChange}
           />
           {errors.pic && <span>{errors.pic.message}</span>}

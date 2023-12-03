@@ -62,5 +62,11 @@ export const genderSchema = yup.object({
 export const countrySchema = yup.object({
   country: yup
     .string()
-    .oneOf(['Russia', 'USA', 'China'], 'Please choose your country'),
+    .required('Please choose your country')
+});
+
+export const picSchema = yup.object({
+  pic: yup
+    .string()
+    .required('Please upload your profile picture'),
 });

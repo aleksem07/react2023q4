@@ -11,6 +11,8 @@ import {
   passwordSchema,
   confirmPasswordSchema,
   acceptTCSchema,
+  countrySchema,
+  picSchema,
 } from '../../utils/validator/validator';
 import checkPasswordLength from '../../utils/password/password';
 import * as yup from 'yup';
@@ -136,6 +138,35 @@ export default function UncontrolledForm() {
             yupError.path === 'acceptTC'
               ? yupError.errors[0]
               : prevErrors.acceptTC,
+        }));
+      }
+    }
+
+    try {
+      await countrySchema.validate(formData);
+    } catch (err) {
+      isValid = false;
+      if (err instanceof yup.ValidationError) {
+        const yupError = err as yup.ValidationError;
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          country:
+            yupError.path === 'country'
+              ? yupError.errors[0]
+              : prevErrors.country,
+        }));
+      }
+    }
+
+    try {
+      await picSchema.validate(formData);
+    } catch (err) {
+      isValid = false;
+      if (err instanceof yup.ValidationError) {
+        const yupError = err as yup.ValidationError;
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          pic: yupError.path === 'pic' ? yupError.errors[0] : prevErrors.pic,
         }));
       }
     }
@@ -276,6 +307,7 @@ export default function UncontrolledForm() {
             accept="image/png, image/jpeg, image/jpg"
             onChange={handleImageChange}
           />
+          {errors.pic && <span>{errors.pic}</span>}
         </label>
 
         <label>
@@ -296,6 +328,7 @@ export default function UncontrolledForm() {
               <option key={index} value={country} />
             ))}
           </datalist>
+          {errors.country && <span>{errors.country}</span>}
         </label>
 
         <button type="submit">Submit</button>
